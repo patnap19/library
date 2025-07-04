@@ -1,62 +1,62 @@
 [
   {
-    "tytuł": "Wiedźmin",
+    "tytuł": "Wiedźmin: Ostatnie życzenie",
+    "autor": "Andrzej Sapkowski",
+    "rok": 1993,
+    "gatunek": "Fantasy"
+  },
+  {
+    "tytuł": "Wiedźmin: Miecz przeznaczenia",
+    "autor": "Andrzej Sapkowski",
+    "rok": 1992,
+    "gatunek": "Fantasy"
+  },
+  {
+    "tytuł": "Wiedźmin: Krew elfów",
     "autor": "Andrzej Sapkowski",
     "rok": 1994,
-    "gatunek": "fantasy"
+    "gatunek": "Fantasy"
   },
   {
     "tytuł": "Lalka",
     "autor": "Bolesław Prus",
     "rok": 1890,
-    "gatunek": "powieść realistyczna"
+    "gatunek": "Powieść"
+  },
+  {
+    "tytuł": "Pan Tadeusz",
+    "autor": "Adam Mickiewicz",
+    "rok": 1834,
+    "gatunek": "Epopeja narodowa"
   },
   {
     "tytuł": "1984",
     "autor": "George Orwell",
     "rok": 1949,
-    "gatunek": "dystopia"
+    "gatunek": "Dystopia"
   },
   {
-    "tytuł": "Harry Potter i Kamień Filozoficzny",
-    "autor": "J.K. Rowling",
-    "rok": 1997,
-    "gatunek": "fantasy"
-  },
-  {
-    "tytuł": "Zbrodnia i kara",
-    "autor": "Fiodor Dostojewski",
-    "rok": 1866,
-    "gatunek": "powieść psychologiczna"
-  },
-  {
-    "tytuł": "Sto lat samotności",
-    "autor": "Gabriel García Márquez",
-    "rok": 1967,
-    "gatunek": "magiczny realizm"
-  },
-  {
-    "tytuł": "Mistrz i Małgorzata",
-    "autor": "Michaił Bułhakow",
-    "rok": 1966,
-    "gatunek": "powieść satyryczna"
-  },
-  {
-    "tytuł": "Mały Książę",
-    "autor": "Antoine de Saint-Exupéry",
-    "rok": 1943,
-    "gatunek": "literatura dziecięca"
+    "tytuł": "Rok 1984",
+    "autor": "George Orwell",
+    "rok": 1949,
+    "gatunek": "Dystopia"
   },
   {
     "tytuł": "Folwark zwierzęcy",
     "autor": "George Orwell",
     "rok": 1945,
-    "gatunek": "satyrą polityczna"
+    "gatunek": "Satyra polityczna"
   },
   {
-    "tytuł": "Duma i uprzedzenie",
-    "autor": "Jane Austen",
-    "rok": 1813,
-    "gatunek": "powieść obyczajowa"
+    "tytuł": "Zbrodnia i kara",
+    "autor": "Fiodor Dostojewski",
+    "rok": 1866,
+    "gatunek": "Powieść psychologiczna"
+  },
+  {
+    "tytuł": "Bracia Karamazow",
+    "autor": "Fiodor Dostojewski",
+    "rok": 1880,
+    "gatunek": "Powieść filozoficzna"
   }
 ]
