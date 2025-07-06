@@ -1,11 +1,20 @@
 import json
+import os
+
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 BOOKS_FILE = 'books.json'
 
 def add_book_to_library(title_of_new_book):
     author_of_new_book = input("Podaj autora: ")
     category_of_new_book = input("Podaj gatunek: ")
-    year_of_new_book = int(input("Podaj rok wydania: "))
+    while True:
+        try:
+            year_of_new_book = int(input("Podaj rok wydania: "))
+            break
+        except ValueError:
+            print("Podano niepoprawny rok. Wprowadź liczbę całkowitą.")
         
     new_book = {
         'tytuł': title_of_new_book.title(),
@@ -16,7 +25,9 @@ def add_book_to_library(title_of_new_book):
     library = load_books(BOOKS_FILE)
     library.append(new_book)
     with open(BOOKS_FILE, 'w',  encoding="utf-8") as file:
-        file.write(json.dumps(library))
+        json.dump(library, file, ensure_ascii=False, indent=4)
+    
+    print("Książka została dodana do biblioteki.")
 
 def check_if_exist(phrase_to_check):
     data = load_books(BOOKS_FILE)
@@ -31,7 +42,8 @@ def load_books(file_path=BOOKS_FILE):
 
 def print_all_books():
     data = load_books(BOOKS_FILE)
-    for book in data:
+    for i, book in enumerate(data, 1):
+        print(f"{i}.")
         print_book(book)
         
 def print_book(book_to_print):
@@ -55,7 +67,8 @@ def find_book(area_of_search):
 print("Witaj w naszej szkolnej bibliotece! Co chciałbyś zrobić?")
 
 while True:
-    print("1.Wyświetl wszystkie dostępne książki w naszej bibliotece.")
+    print("Wybierz opcję: ")
+    print("1. Wyświetl wszystkie książki.")
     print("2. Wyszukaj książki.")
     print("3. Dodaj książkę.")
     print("0. Zakończ pracę.")
@@ -79,11 +92,12 @@ while True:
             else:
                 print("Nie wybrano żadnej opcji, spróbuj ponownie")
     elif user_choice == '3':
-        print(20 * '\n')
+        clear_screen()
         print(30 * '-')
         title_of_new_book = input("Podaj tytuł książki: ")
         if check_if_exist(title_of_new_book):
             print("Podana książka już istnieje w naszej bibliotece")
+            print('-' * 30)
         else:
             add_book_to_library(title_of_new_book)
 
