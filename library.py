@@ -54,6 +54,7 @@ def print_book(book_to_print):
         print('-' * 30)
         
 def find_book(area_of_search):
+    clear_screen()
     phrase_to_find = input('Podaj frazę do wyszukiwania: ').lower()
     data = load_books(BOOKS_FILE)
     found = False
@@ -63,6 +64,7 @@ def find_book(area_of_search):
             print_book(book)
     if not found:
         print("Niestety nie odnaleźliśmy żadnej książki pasującej do podanej przez Ciebie frazy.")
+        print('-' * 30)
 
 print("Witaj w naszej szkolnej bibliotece! Co chciałbyś zrobić?")
 
@@ -75,8 +77,10 @@ while True:
     user_choice = input("Twój wybór: ")
 
     if user_choice == '1':
+        clear_screen()
         print_all_books()
     elif user_choice == '2':
+        clear_screen()
         while True:
             which_area_search = input("W której kategorii chcesz poszukać książki?\n1.Autor\n2.Tytuł\n3.Gatunek\n4.Rok wydania\n0.Wyjście\nTwój wybór: ")
             if which_area_search == '1':
@@ -102,7 +106,10 @@ while True:
             add_book_to_library(title_of_new_book)
 
     elif user_choice == '0':
+        clear_screen()
         print("Dziękujęmy, do zobaczenia")
         break
     else:
+        clear_screen()
         print("Nie wybrano żadnej opcji, spróbuj ponownie")
+        print('-' * 30)
