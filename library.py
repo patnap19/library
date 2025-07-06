@@ -2,7 +2,17 @@ import json
 
 BOOKS_FILE = 'books.json'
 
-def add_book_to_library(new_book):
+def add_book_to_library(title_of_new_book):
+    author_of_new_book = input("Podaj autora: ")
+    category_of_new_book = input("Podaj gatunek: ")
+    year_of_new_book = int(input("Podaj rok wydania: "))
+        
+    new_book = {
+        'tytuł': title_of_new_book.title(),
+        'autor': author_of_new_book.title(),
+        'rok': year_of_new_book,
+        'gatunek': category_of_new_book.title()
+    }    
     library = load_books(BOOKS_FILE)
     library.append(new_book)
     with open(BOOKS_FILE, 'w',  encoding="utf-8") as file:
@@ -75,18 +85,7 @@ while True:
         if check_if_exist(title_of_new_book):
             print("Podana książka już istnieje w naszej bibliotece")
         else:
-            author_of_new_book = input("Podaj autora: ")
-            category_of_new_book = input("Podaj gatunek: ")
-            year_of_new_book = int(input("Podaj rok wydania: "))
-        
-        new_book = {
-            'tytuł': title_of_new_book.title(),
-            'autor': author_of_new_book.title(),
-            'rok': year_of_new_book,
-            'gatunek': category_of_new_book.title()
-        }
-        
-        add_book_to_library(new_book)
+            add_book_to_library(title_of_new_book)
 
     elif user_choice == '0':
         print("Dziękujęmy, do zobaczenia")
