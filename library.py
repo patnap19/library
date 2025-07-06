@@ -2,13 +2,25 @@ import json
 
 BOOKS_FILE = 'books.json'
 
+def add_book_to_library(new_book):
+    library = load_books(BOOKS_FILE)
+    library.append(new_book)
+    with open(BOOKS_FILE, 'w',  encoding="utf-8") as file:
+        file.write(json.dumps(library))
+
+def check_if_exist(phrase_to_check):
+    data = load_books(BOOKS_FILE)
+    for book in data:
+        if phrase_to_check.lower() == book['tytuł'].lower():
+            return True
+    return False
+
 def load_books(file_path=BOOKS_FILE):
     with open(file_path, 'r', encoding="utf-8") as file:
         return json.load(file)
 
 def print_all_books():
     data = load_books(BOOKS_FILE)
-
     for book in data:
         print_book(book)
         
@@ -34,7 +46,8 @@ print("Witaj w naszej szkolnej bibliotece! Co chciałbyś zrobić?")
 
 while True:
     print("1.Wyświetl wszystkie dostępne książki w naszej bibliotece.")
-    print("2. Wyszukaj książki po autorze.")
+    print("2. Wyszukaj książki.")
+    print("3. Dodaj książkę.")
     print("0. Zakończ pracę.")
     user_choice = input("Twój wybór: ")
 
@@ -55,8 +68,25 @@ while True:
                 break
             else:
                 print("Nie wybrano żadnej opcji, spróbuj ponownie")
-            
+    elif user_choice == '3':
+        print(20 * '\n')
+        print(30 * '-')
+        title_of_new_book = input("Podaj tytuł książki: ")
+        if check_if_exist(title_of_new_book):
+            print("Podana książka już istnieje w naszej bibliotece")
+        else:
+            author_of_new_book = input("Podaj autora: ")
+            category_of_new_book = input("Podaj gatunek: ")
+            year_of_new_book = int(input("Podaj rok wydania: "))
         
+        new_book = {
+            'tytuł': title_of_new_book.title(),
+            'autor': author_of_new_book.title(),
+            'rok': year_of_new_book,
+            'gatunek': category_of_new_book.title()
+        }
+        
+        add_book_to_library(new_book)
 
     elif user_choice == '0':
         print("Dziękujęmy, do zobaczenia")
