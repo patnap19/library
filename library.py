@@ -19,18 +19,18 @@ def add_book_to_library(title_of_new_book):
             break
         except ValueError:
             print("Podano niepoprawny rok. Wprowadź liczbę całkowitą.")
-        
+
     new_book = {
         'tytuł': title_of_new_book.title(),
         'autor': author_of_new_book.title(),
         'rok': year_of_new_book,
         'gatunek': category_of_new_book.title(),
         'wypozyczona': False
-    }    
+    }
     library = load_books(BOOKS_FILE)
     library.append(new_book)
     save_books(library)
-    
+
     print("Książka została dodana do biblioteki.")
 
 def book_exists_by_title(phrase_to_check):
@@ -49,15 +49,14 @@ def print_all_books():
     for i, book in enumerate(data, 1):
         print(f"{i}.")
         print_book(book)
-        
+
 def print_all_free_books():
-    
     data = load_books(BOOKS_FILE)
     for i, book in enumerate(data, 1):
         if book['wypozyczona'] == False:
             print(f"{i}.")
             print_book(book)
-        
+
 def print_book(book_to_print):
         print(f"\nTytuł: {book_to_print['tytuł']}")
         print(f"Autor: {book_to_print['autor']}")
@@ -65,7 +64,7 @@ def print_book(book_to_print):
         print(f"Gatunek: {book_to_print['gatunek']}")
         print(f"Wypożyczona: {'Tak' if book_to_print['wypozyczona'] else 'Nie'}")
         print('-' * 30)
-        
+
 def find_book(area_of_search):
     clear_screen()
     phrase_to_find = input('Podaj frazę do wyszukiwania: ').lower()
@@ -78,18 +77,19 @@ def find_book(area_of_search):
     if not found:
         print("Niestety nie odnaleźliśmy żadnej książki pasującej do podanej przez Ciebie frazy.")
         print('-' * 30)
-        
+
 def show_menu():
     print("Wybierz opcję: ")
     print("1. Wyświetl wszystkie książki.")
     print("2. Wyszukaj książki.")
     print("3. Dodaj książkę.")
     print("4. Wypożycz książkę.")
+    print("5. Zwróć książkę.")
     print("0. Zakończ pracę.")
-    
+
 def borrow_book(index_of_book):
     data = load_books(BOOKS_FILE)
-    
+
     if 1 <= index_of_book <= len(data):
         book = data[index_of_book - 1]
         if book['wypozyczona']:
@@ -101,7 +101,7 @@ def borrow_book(index_of_book):
     else:
         print("Niepoprawny indeks książki.")
         return None
-    
+
 def borrow_book_handler():
     clear_screen()
     all_books = load_books(BOOKS_FILE)
@@ -110,10 +110,10 @@ def borrow_book_handler():
     if not available_books:
         print("Brak dostępnych książek do wypożyczenia.")
         print('-' * 30)
-        return  # ⬅ ważne: wyjście z funkcji
+        return
 
     print("Wybierz książkę, którą chcesz wypożyczyć:")
-    
+
     for i, book in enumerate(available_books, 1):
         print(f"{i}.")
         print_book(book)
@@ -127,18 +127,17 @@ def borrow_book_handler():
         print('-' * 30)
         return
 
-    # Ustalamy, który indeks ma książka w oryginalnej liście `all_books`
     selected_book = available_books[user_input - 1]
     original_index = all_books.index(selected_book)
 
     clear_screen()
-    borrowed_book = borrow_book(original_index + 1)  # bo indeksy w `borrow_book` są 1-based
+    borrowed_book = borrow_book(original_index + 1)
     if borrowed_book is None:
         print("Przenosimy Cię do Menu Głównego")
     else:
         print("Wypożyczona przez Ciebie książka to: ")
         print_book(borrowed_book)
-        
+
 def add_book_handler():
     clear_screen()
     print(30 * '-')
@@ -166,6 +165,56 @@ def search_handler():
             break
         else:
             print("Nie wybrano żadnej opcji, spróbuj ponownie")
+            
+def return_book(index_of_book):
+    data = load_books(BOOKS_FILE)
+
+    if 1 <= index_of_book <= len(data):
+        book = data[index_of_book - 1]
+        if not book['wypozyczona']:
+            print("Ta książka nie jest wypożyczona.")
+            return None
+        data[index_of_book - 1]['wypozyczona'] = False
+        save_books(data)
+        return book
+    else:
+        print("Niepoprawny indeks książki.")
+        return None
+            
+def return_book_handler():
+    clear_screen()
+    all_books = load_books()
+    borrowed_books = [book for book in all_books if book['wypozyczona']]
+    if not borrowed_books:
+        print("Brak wypożyczonyhch książek.")
+        print('-' * 30)
+        return
+    print("Lista książek, które musisz zwrócić: ")
+    for i, book in enumerate(borrowed_books, 1):
+        print(f"{i}.")
+        print_book(book)
+
+    try:
+        user_input = int(input("Twój wybór: "))
+        if user_input < 1 or user_input > len(borrowed_books):
+            raise ValueError
+    except ValueError:
+        clear_screen()
+        print("Nieprawidłowy wybór. Wprowadź poprawny numer z listy.")
+        print('-' * 30)
+        return
+
+    selected_book = borrowed_books[user_input - 1]
+    original_index = all_books.index(selected_book)
+
+    clear_screen()
+    returned_book = return_book(original_index + 1)
+    if returned_book is None:
+        print("Przenosimy Cię do Menu Głównego")
+    else:
+        print("Zwróciłeś książkę")
+        print_book(returned_book)
+    
 
 def library():
 
@@ -182,10 +231,10 @@ def library():
             search_handler()
         elif user_choice == '3':
             add_book_handler()
-                
         elif user_choice == '4':
-            borrow_book_handler()          
-
+            borrow_book_handler()
+        elif user_choice == '5':
+            return_book_handler()
         elif user_choice == '0':
             clear_screen()
             print("Dziękujęmy, do zobaczenia")
@@ -195,5 +244,5 @@ def library():
             clear_screen()
             print("Nie wybrano żadnej opcji, spróbuj ponownie")
             print('-' * 30)
-            
+
 library()

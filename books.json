@@ -4,14 +4,14 @@
         "autor": "Andrzej Sapkowski",
         "rok": 1993,
         "gatunek": "Fantasy",
-        "wypozyczona": true
+        "wypozyczona": false
     },
     {
         "tytuł": "Wiedźmin: Miecz przeznaczenia",
         "autor": "Andrzej Sapkowski",
         "rok": 1992,
         "gatunek": "Fantasy",
-        "wypozyczona": true
+        "wypozyczona": false
     },
     {
         "tytuł": "Wiedźmin: Krew elfów",
