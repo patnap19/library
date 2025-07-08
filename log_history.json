@@ -1,0 +1,12 @@
+[
+    {
+        "time": "[2025-07-08 18:57:48.228146]",
+        "action": "Wypożyczono",
+        "book_title": "Harry Potter I Komnata Tajemnic"
+    },
+    {
+        "time": "[2025-07-08 18:58:03.197718]",
+        "action": "Wypożyczono",
+        "book_title": "Wiedźmin: Ostatnie życzenie"
+    }
+]

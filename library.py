@@ -1,10 +1,23 @@
 import json
 import os
+from datetime import datetime
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 BOOKS_FILE = 'books.json'
+LOG_HISTORY_FILE = 'log_history.json'
+
+def log_action(action, book_title):
+    log_history = load_file(LOG_HISTORY_FILE)
+    new_log = {
+        'time': datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),'time': f"[{datetime.now()}]",
+        'action': action,
+        'book_title': book_title
+    }
+    log_history.append(new_log)
+    with open(LOG_HISTORY_FILE, 'w', encoding="utf-8") as file:
+        json.dump(log_history, file, ensure_ascii=False, indent=4)
 
 def save_books(data, file_path=BOOKS_FILE):
     with open(file_path, 'w', encoding="utf-8") as file:
@@ -27,31 +40,37 @@ def add_book_to_library(title_of_new_book):
         'gatunek': category_of_new_book.title(),
         'wypozyczona': False
     }
-    library = load_books(BOOKS_FILE)
+    library = load_file(BOOKS_FILE)
     library.append(new_book)
+    log_action("Dodano", new_book['tytuł'])
     save_books(library)
 
     print("Książka została dodana do biblioteki.")
 
 def book_exists_by_title(phrase_to_check):
-    data = load_books(BOOKS_FILE)
+    data = load_file(BOOKS_FILE)
     for book in data:
         if phrase_to_check.lower() == book['tytuł'].lower():
             return True
     return False
 
-def load_books(file_path=BOOKS_FILE):
-    with open(file_path, 'r', encoding="utf-8") as file:
-        return json.load(file)
+def load_file(file_path):
+    if not os.path.exists(file_path):
+        return []
+    with open(file_path, 'r', encoding='utf-8') as file:
+        try:
+            return json.load(file)
+        except json.JSONDecodeError:
+            return []  # plik istnieje, ale jest pusty lub uszkodzony
 
 def print_all_books():
-    data = load_books(BOOKS_FILE)
+    data = load_file(BOOKS_FILE)
     for i, book in enumerate(data, 1):
         print(f"{i}.")
         print_book(book)
 
 def print_all_free_books():
-    data = load_books(BOOKS_FILE)
+    data = load_file(BOOKS_FILE)
     for i, book in enumerate(data, 1):
         if book['wypozyczona'] == False:
             print(f"{i}.")
@@ -68,7 +87,7 @@ def print_book(book_to_print):
 def find_book(area_of_search):
     clear_screen()
     phrase_to_find = input('Podaj frazę do wyszukiwania: ').lower()
-    data = load_books(BOOKS_FILE)
+    data = load_file(BOOKS_FILE)
     found = False
     for book in data:
         if phrase_to_find in str(book[area_of_search]).lower():
@@ -88,7 +107,7 @@ def show_menu():
     print("0. Zakończ pracę.")
 
 def borrow_book(index_of_book):
-    data = load_books(BOOKS_FILE)
+    data = load_file(BOOKS_FILE)
 
     if 1 <= index_of_book <= len(data):
         book = data[index_of_book - 1]
@@ -104,7 +123,7 @@ def borrow_book(index_of_book):
 
 def borrow_book_handler():
     clear_screen()
-    all_books = load_books(BOOKS_FILE)
+    all_books = load_file(BOOKS_FILE)
     available_books = [book for book in all_books if not book['wypozyczona']]
 
     if not available_books:
@@ -132,6 +151,7 @@ def borrow_book_handler():
 
     clear_screen()
     borrowed_book = borrow_book(original_index + 1)
+    log_action('Wypożyczono', borrowed_book['tytuł'])
     if borrowed_book is None:
         print("Przenosimy Cię do Menu Głównego")
     else:
@@ -167,7 +187,7 @@ def search_handler():
             print("Nie wybrano żadnej opcji, spróbuj ponownie")
             
 def return_book(index_of_book):
-    data = load_books(BOOKS_FILE)
+    data = load_file(BOOKS_FILE)
 
     if 1 <= index_of_book <= len(data):
         book = data[index_of_book - 1]
@@ -183,7 +203,7 @@ def return_book(index_of_book):
             
 def return_book_handler():
     clear_screen()
-    all_books = load_books()
+    all_books = load_file(BOOKS_FILE)
     borrowed_books = [book for book in all_books if book['wypozyczona']]
     if not borrowed_books:
         print("Brak wypożyczonyhch książek.")
@@ -213,6 +233,7 @@ def return_book_handler():
         print("Przenosimy Cię do Menu Głównego")
     else:
         print("Zwróciłeś książkę")
+        log_action("Zwrócono", returned_book['tytuł'])
         print_book(returned_book)
     
 
