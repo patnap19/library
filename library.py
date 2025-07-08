@@ -138,7 +138,35 @@ def borrow_book_handler():
     else:
         print("Wypożyczona przez Ciebie książka to: ")
         print_book(borrowed_book)
-                
+        
+def add_book_handler():
+    clear_screen()
+    print(30 * '-')
+    title_of_new_book = input("Podaj tytuł książki: ")
+    if book_exists_by_title(title_of_new_book):
+        print("Podana książka już istnieje w naszej bibliotece")
+        print('-' * 30)
+    else:
+        add_book_to_library(title_of_new_book)
+        print('-' * 30)
+
+def search_handler():
+    clear_screen()
+    while True:
+        which_area_search = input("W której kategorii chcesz poszukać książki?\n1.Autor\n2.Tytuł\n3.Gatunek\n4.Rok wydania\n0.Wyjście\nTwój wybór: ")
+        if which_area_search == '1':
+            find_book('autor')
+        elif which_area_search == '2':
+            find_book('tytuł')
+        elif which_area_search == '3':
+            find_book('gatunek')
+        elif which_area_search == '4':
+            find_book('rok')
+        elif which_area_search == '0':
+            break
+        else:
+            print("Nie wybrano żadnej opcji, spróbuj ponownie")
+
 def library():
 
     print("Witaj w naszej szkolnej bibliotece! Co chciałbyś zrobić?")
@@ -151,31 +179,9 @@ def library():
             clear_screen()
             print_all_books()
         elif user_choice == '2':
-            clear_screen()
-            while True:
-                which_area_search = input("W której kategorii chcesz poszukać książki?\n1.Autor\n2.Tytuł\n3.Gatunek\n4.Rok wydania\n0.Wyjście\nTwój wybór: ")
-                if which_area_search == '1':
-                    find_book('autor')
-                elif which_area_search == '2':
-                    find_book('tytuł')
-                elif which_area_search == '3':
-                    find_book('gatunek')
-                elif which_area_search == '4':
-                    find_book('rok')
-                elif which_area_search == '0':
-                    break
-                else:
-                    print("Nie wybrano żadnej opcji, spróbuj ponownie")
+            search_handler()
         elif user_choice == '3':
-            clear_screen()
-            print(30 * '-')
-            title_of_new_book = input("Podaj tytuł książki: ")
-            if book_exists_by_title(title_of_new_book):
-                print("Podana książka już istnieje w naszej bibliotece")
-                print('-' * 30)
-            else:
-                add_book_to_library(title_of_new_book)
-                print('-' * 30)
+            add_book_handler()
                 
         elif user_choice == '4':
             borrow_book_handler()          
