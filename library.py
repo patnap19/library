@@ -102,6 +102,43 @@ def borrow_book(index_of_book):
         print("Niepoprawny indeks książki.")
         return None
     
+def borrow_book_handler():
+    clear_screen()
+    all_books = load_books(BOOKS_FILE)
+    available_books = [book for book in all_books if not book['wypozyczona']]
+
+    if not available_books:
+        print("Brak dostępnych książek do wypożyczenia.")
+        print('-' * 30)
+        return  # ⬅ ważne: wyjście z funkcji
+
+    print("Wybierz książkę, którą chcesz wypożyczyć:")
+    
+    for i, book in enumerate(available_books, 1):
+        print(f"{i}.")
+        print_book(book)
+
+    try:
+        user_input = int(input("Twój wybór: "))
+        if user_input < 1 or user_input > len(available_books):
+            raise ValueError
+    except ValueError:
+        print("Nieprawidłowy wybór. Wprowadź poprawny numer z listy.")
+        print('-' * 30)
+        return
+
+    # Ustalamy, który indeks ma książka w oryginalnej liście `all_books`
+    selected_book = available_books[user_input - 1]
+    original_index = all_books.index(selected_book)
+
+    clear_screen()
+    borrowed_book = borrow_book(original_index + 1)  # bo indeksy w `borrow_book` są 1-based
+    if borrowed_book is None:
+        print("Przenosimy Cię do Menu Głównego")
+    else:
+        print("Wypożyczona przez Ciebie książka to: ")
+        print_book(borrowed_book)
+                
 def library():
 
     print("Witaj w naszej szkolnej bibliotece! Co chciałbyś zrobić?")
@@ -141,28 +178,7 @@ def library():
                 print('-' * 30)
                 
         elif user_choice == '4':
-            clear_screen()
-            available_books = [book for book in load_books(BOOKS_FILE) if not book['wypozyczona']]
-            if not available_books:
-                print("Brak dostępnych książek do wypożyczenia.")
-                continue
-            print("Wybierz książkę, którą chcesz wypożyczyć:")
-            print_all_free_books()
-            try:
-                index_of_choosen_book = int(input("Twój wybór: "))
-            except ValueError:
-                print("Nieprawidłowy wybór. Wprowadź liczbę.")
-                continue
-            clear_screen()
-            borrowed_book = borrow_book(index_of_choosen_book)
-            if borrowed_book is None:
-                print('Przenosimy Cię do Menu Głównego')
-                print('-' * 30)
-            else:
-                print("Wypożyczona przez Ciebie książka to: ")
-                print_book(borrowed_book)
-                print('-' * 30)
-            
+            borrow_book_handler()          
 
         elif user_choice == '0':
             clear_screen()
