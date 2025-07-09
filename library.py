@@ -104,7 +104,21 @@ def show_menu():
     print("3. Dodaj książkę.")
     print("4. Wypożycz książkę.")
     print("5. Zwróć książkę.")
+    print("6. Wyświetl statystyki.")
     print("0. Zakończ pracę.")
+
+    
+def show_library_stats():
+    clear_screen()
+    data = load_file(BOOKS_FILE)
+    all_books_number = len(data)
+    all_borrowed_books_number = 0
+    for book in data:
+        if book['wypozyczona'] == True:
+            all_borrowed_books_number += 1
+    print(f"Łączna liczba książek w bibliotece: {all_books_number}")
+    print(f"Liczba wypożyczonych książek: {all_borrowed_books_number}")
+    print("Działa")
 
 def borrow_book(index_of_book):
     data = load_file(BOOKS_FILE)
@@ -256,6 +270,8 @@ def library():
             borrow_book_handler()
         elif user_choice == '5':
             return_book_handler()
+        elif user_choice == '6':
+            show_library_stats()
         elif user_choice == '0':
             clear_screen()
             print("Dziękujęmy, do zobaczenia")
