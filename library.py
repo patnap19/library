@@ -61,7 +61,7 @@ def load_file(file_path):
         try:
             return json.load(file)
         except json.JSONDecodeError:
-            return []  # plik istnieje, ale jest pusty lub uszkodzony
+            return []
 
 def print_all_books():
     data = load_file(BOOKS_FILE)

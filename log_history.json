@@ -8,5 +8,10 @@
         "time": "[2025-07-08 18:58:03.197718]",
         "action": "Wypożyczono",
         "book_title": "Wiedźmin: Ostatnie życzenie"
+    },
+    {
+        "time": "[2025-07-08 19:01:26.576561]",
+        "action": "Zwrócono",
+        "book_title": "Wiedźmin: Ostatnie życzenie"
     }
 ]
