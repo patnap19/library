@@ -11,7 +11,7 @@ LOG_HISTORY_FILE = 'log_history.json'
 def log_action(action, book_title):
     log_history = load_file(LOG_HISTORY_FILE)
     new_log = {
-        'time': datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),'time': f"[{datetime.now()}]",
+        'time': datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),
         'action': action,
         'book_title': book_title
     }
@@ -282,4 +282,20 @@ def library():
             print("Nie wybrano żadnej opcji, spróbuj ponownie")
             print('-' * 30)
 
-library()
+if __name__ == "__main__":
+    library()
+    
+# def update_book_status(index, wypozyczona):
+#     data = load_file(BOOKS_FILE)
+#     if 1 <= index <= len(data):
+#         book = data[index - 1]
+#         if book['wypozyczona'] == wypozyczona:
+#             print("Nieprawidłowa operacja na książce.")
+#             return None
+#         data[index - 1]['wypozyczona'] = wypozyczona
+#         save_books(data)
+#         return book
+#     print("Niepoprawny indeks książki.")
+
+
+# TODO change two function to one function

@@ -25,7 +25,7 @@
         "autor": "Bolesław Prus",
         "rok": 1890,
         "gatunek": "Powieść",
-        "wypozyczona": false
+        "wypozyczona": true
     },
     {
         "tytuł": "Pan Tadeusz",
@@ -88,6 +88,6 @@
         "autor": "J.K. Rowling",
         "rok": 2002,
         "gatunek": "Fantasy",
-        "wypozyczona": true
+        "wypozyczona": false
     }
 ]
