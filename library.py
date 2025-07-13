@@ -120,20 +120,20 @@ def show_library_stats():
     print(f"Liczba wypożyczonych książek: {all_borrowed_books_number}")
     print("Działa")
 
-def borrow_book(index_of_book):
-    data = load_file(BOOKS_FILE)
+# def borrow_book(index_of_book):
+#     data = load_file(BOOKS_FILE)
 
-    if 1 <= index_of_book <= len(data):
-        book = data[index_of_book - 1]
-        if book['wypozyczona']:
-            print("Ta książka jest już wypożyczona.")
-            return None
-        data[index_of_book - 1]['wypozyczona'] = True
-        save_books(data)
-        return book
-    else:
-        print("Niepoprawny indeks książki.")
-        return None
+#     if 1 <= index_of_book <= len(data):
+#         book = data[index_of_book - 1]
+#         if book['wypozyczona']:
+#             print("Ta książka jest już wypożyczona.")
+#             return None
+#         data[index_of_book - 1]['wypozyczona'] = True
+#         save_books(data)
+#         return book
+#     else:
+#         print("Niepoprawny indeks książki.")
+#         return None
 
 def borrow_book_handler():
     clear_screen()
@@ -200,20 +200,20 @@ def search_handler():
         else:
             print("Nie wybrano żadnej opcji, spróbuj ponownie")
             
-def return_book(index_of_book):
-    data = load_file(BOOKS_FILE)
+# def return_book(index_of_book):
+#     data = load_file(BOOKS_FILE)
 
-    if 1 <= index_of_book <= len(data):
-        book = data[index_of_book - 1]
-        if not book['wypozyczona']:
-            print("Ta książka nie jest wypożyczona.")
-            return None
-        data[index_of_book - 1]['wypozyczona'] = False
-        save_books(data)
-        return book
-    else:
-        print("Niepoprawny indeks książki.")
-        return None
+#     if 1 <= index_of_book <= len(data):
+#         book = data[index_of_book - 1]
+#         if not book['wypozyczona']:
+#             print("Ta książka nie jest wypożyczona.")
+#             return None
+#         data[index_of_book - 1]['wypozyczona'] = False
+#         save_books(data)
+#         return book
+#     else:
+#         print("Niepoprawny indeks książki.")
+#         return None
             
 def return_book_handler():
     clear_screen()
@@ -284,3 +284,22 @@ def library():
 
 if __name__ == "__main__":
     library()
+    
+    
+class Book:
+    def __init__(self, title, author, year, gener, borrowed = False):
+        self.title = title
+        self.author = author
+        self.year = year
+        self.gener = gener
+        self.borrowed = borrowed
+        
+    def borrow_book(self):
+        if self.borrowed:
+            print("Książka jest już wypożyczona")
+        self.borrowed = True
+    
+    def return_book(self):
+        if not self.borrowed:
+            print("Książka nie była wypożyczona")
+        self.borrowed = False
