@@ -284,18 +284,3 @@ def library():
 
 if __name__ == "__main__":
     library()
-    
-# def update_book_status(index, wypozyczona):
-#     data = load_file(BOOKS_FILE)
-#     if 1 <= index <= len(data):
-#         book = data[index - 1]
-#         if book['wypozyczona'] == wypozyczona:
-#             print("Nieprawidłowa operacja na książce.")
-#             return None
-#         data[index - 1]['wypozyczona'] = wypozyczona
-#         save_books(data)
-#         return book
-#     print("Niepoprawny indeks książki.")
-
-
-# TODO change two function to one function
