@@ -1,6 +1,7 @@
 import json
 import os
 import prettytable
+from collections import Counter
 # from datetime import datetime
 
 # def clear_screen():
@@ -288,11 +289,11 @@ import prettytable
     
     
 class Book:
-    def __init__(self, title, author, year, gener, borrowed = False):
+    def __init__(self, title, author, year, genre, borrowed = False):
         self.title = title
         self.author = author
         self.year = year
-        self.gener = gener
+        self.genre = genre
         self.borrowed = borrowed
         
     def borrow_book(self):
@@ -304,7 +305,7 @@ class Book:
         if not self.borrowed:
             print("Książka nie była wypożyczona")
         self.borrowed = False
-        
+
 class Library:
     def __init__(self, file_path='books.json'):
         self.file_path = file_path
@@ -315,7 +316,14 @@ class Library:
             return []
         with open(self.file_path, 'r', encoding='utf-8') as file:
             try:
-                return json.load(file)
+                data = json.load(file)
+                return [Book(
+                    title=book['tytuł'],
+                    author=book['autor'],
+                    year=book['rok'],
+                    genre=book['gatunek'],
+                    borrowed=book['wypozyczona']
+                ) for book in data]
             except json.JSONDecodeError:
                 return []
     
@@ -324,10 +332,29 @@ class Library:
         table_with_books.field_names = ['Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
         for book in self.books:
             table_with_books.add_row(
-                [book['tytuł'], book['autor'], book['rok'], book['gatunek'], f"{'Tak' if book['wypozyczona'] else 'Nie'}"]
+                [book.title, book.author, book.year, book.genre, 'Tak' if book.borrowed else 'Nie']
             )
             table_with_books.add_divider()
         print(table_with_books)
         
+    def show_stats(self):
+        borrowed_books = 0
+        for book in self.books:
+            if book.borrowed == True:
+                borrowed_books +=1
+        the_most_books_author = Counter(book.author for book in self.books)
+
+        if the_most_books_author:
+            max_count = max(the_most_books_author.values())
+            top_authors = [author for author, count in the_most_books_author.items() if count == max_count]
+
+            print(f"Autorzy z największą liczbą książek ({max_count} książek):")
+            for author in top_authors:
+                print(f"- {author}")
+        else:
+            print("Brak danych o autorach.")
+
+
 new_lib = Library('books.json')
 new_lib.print_books()
+new_lib.show_stats()
