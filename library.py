@@ -338,11 +338,14 @@ class Library:
         print(table_with_books)
         
     def show_stats(self):
-        borrowed_books = 0
-        for book in self.books:
-            if book.borrowed == True:
-                borrowed_books +=1
+        borrowed_books = sum(book.borrowed for book in self.books)
+        all_books = len(self.books)
+        available_books = all_books - borrowed_books
         the_most_books_author = Counter(book.author for book in self.books)
+        
+        print(f"📚 Łączna liczba książek: {all_books}")
+        print(f"✅ Dostępnych: {available_books}")
+        print(f"📕 Wypożyczonych: {borrowed_books}\n")
 
         if the_most_books_author:
             max_count = max(the_most_books_author.values())
