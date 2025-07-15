@@ -18,13 +18,6 @@ import uuid
 
 
 
-# def book_exists_by_title(phrase_to_check):
-#     data = load_file(BOOKS_FILE)
-#     for book in data:
-#         if phrase_to_check.lower() == book['tytuł'].lower():
-#             return True
-#     return False
-
 
 # # def borrow_book(index_of_book):
 # #     data = load_file(BOOKS_FILE)
@@ -131,6 +124,13 @@ import uuid
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
     
+FILTERS_FOR_BOOKS = {'title': 'tytuł',
+    'author': 'autor', 
+    'year': 'rok', 
+    'genre': 'gatunek',
+    'borrowed': 'wypożyczona'
+}
+    
 def get_valid_text(prompt):
     while True:
         user_input = input(prompt).strip()
@@ -161,11 +161,13 @@ class Book:
     def borrow_book(self):
         if self.borrowed:
             print("Książka jest już wypożyczona")
+            return
         self.borrowed = True
 
     def return_book(self):
         if not self.borrowed:
             print("Książka nie była wypożyczona")
+            return
         self.borrowed = False
 
 class Library:
@@ -190,28 +192,28 @@ class Library:
             except json.JSONDecodeError:
                 return []
 
-    def search_in_library(self):
-        clear_screen()
-        while True:
-            phrase_to_find = str(input("Wpisz tytuł książki, której szukasz: "))
-            if not phrase_to_find:
-                clear_screen()
-                print("Nie podano frazy do odnalezienia, spróbuj ponownie.")
-            else:
-                break
+    def filter_by_field(self, books, field):
+        prompt = f"Filtruj wg {FILTERS_FOR_BOOKS[field]} (pozostaw puste, aby pominąć): "
+        value = input(prompt).strip()
 
-        filtered_books = []
-        for book in self.books:
-            if phrase_to_find.lower() in book.title.lower():
-                filtered_books.append(book)
+        if not value:
+            return books  # brak filtra, zwracamy bez zmian
 
-        if not filtered_books:
-            clear_screen()
-            print(f'Niestety, nie odnaleziono żadnej książki związanej z frazą "{phrase_to_find}".')
-        else:
-            clear_screen()
-            print(f'Książki pasujące do frazy "{phrase_to_find}": ')
-            self.display_books(filtered_books)
+        if field == 'borrowed':
+            value = value.lower()
+            if value not in ['tak', 'nie']:
+                print("❌ Wpisz 'tak' lub 'nie'. Pominięto ten filtr.")
+                return books
+            expected = value == 'tak'
+            return [book for book in books if book.borrowed == expected]
+
+        if field == 'year':
+            if not value.isdigit():
+                print("❌ Rok musi być liczbą. Pominięto ten filtr.")
+                return books
+            return [book for book in books if book.year == int(value)]
+
+        return [book for book in books if value.lower() in getattr(book, field).lower()]
 
     def save_books(self):
         with open(self.file_path, 'w', encoding='utf-8') as file:
@@ -277,7 +279,16 @@ class Library:
             print("Brak danych o autorach.")
         
     def filter_books(self):
-        print('dsad')
+        books_to_filter = self.books
+        for field in FILTERS_FOR_BOOKS:
+            books_to_filter = self.filter_by_field(books_to_filter, field)
+
+        clear_screen()
+        if books_to_filter:
+            print("📘 Wyniki filtrowania:")
+            self.display_books(books_to_filter)
+        else:
+            print("❌ Nie znaleziono książek pasujących do wszystkich filtrów.")
         
 class LibraryApp:
     def __init__(self):
@@ -286,20 +297,18 @@ class LibraryApp:
     def run(self):
         while True:
             clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Znajdź książkę\n4. Filtruj książki\n5. Statystyki\n6. Wyjście")
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n0. Wyjście")
             choice = input("Wybierz opcję: ")
 
             if choice == "1":
                 self.library.print_all_books()
             elif choice == "2":
                 self.library.add_book_to_library()
-            elif choice == '3':
-                self.library.search_in_library()
-            elif choice == "4":
+            elif choice == "3":
                 self.library.filter_books()
-            elif choice == '5':
+            elif choice == '4':
                 self.library.show_stats()
-            elif choice == "6":
+            elif choice == "0":
                 print("Do zobaczenia!")
                 break
             else:
