@@ -190,7 +190,7 @@ class Library:
             except json.JSONDecodeError:
                 return []
 
-    def find_book_in_library(self):
+    def search_in_library(self):
         clear_screen()
         while True:
             phrase_to_find = str(input("Wpisz tytuł książki, której szukasz: "))
@@ -275,7 +275,10 @@ class Library:
                 print(f"- {author}")
         else:
             print("Brak danych o autorach.")
-            
+        
+    def filter_books(self):
+        print('dsad')
+        
 class LibraryApp:
     def __init__(self):
         self.library = Library()
@@ -283,7 +286,7 @@ class LibraryApp:
     def run(self):
         while True:
             clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Znajdź książkę\n4. Statystyki\n5. Wyjście")
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Znajdź książkę\n4. Filtruj książki\n5. Statystyki\n6. Wyjście")
             choice = input("Wybierz opcję: ")
 
             if choice == "1":
@@ -291,10 +294,12 @@ class LibraryApp:
             elif choice == "2":
                 self.library.add_book_to_library()
             elif choice == '3':
-                self.library.find_book_in_library()
+                self.library.search_in_library()
             elif choice == "4":
+                self.library.filter_books()
+            elif choice == '5':
                 self.library.show_stats()
-            elif choice == "5":
+            elif choice == "6":
                 print("Do zobaczenia!")
                 break
             else:
