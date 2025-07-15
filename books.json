@@ -102,5 +102,21 @@
         "year": 2002,
         "genre": "Fantasy",
         "borrowed": false
+    },
+    {
+        "id": "d5014efa-3d9f-49ad-865e-56a39c98a90a",
+        "title": "Harry Potter i Więźień Askabanu",
+        "author": "J.K. Rowling",
+        "year": 2003,
+        "genre": "Fantasy",
+        "borrowed": false
+    },
+    {
+        "id": "2021f58e-b446-4bb6-a413-7e50decefe28",
+        "title": "Harry Potter i Czara Ognia",
+        "author": "J.K. Rowling",
+        "year": 2004,
+        "genre": "Fantasy",
+        "borrowed": false
     }
 ]

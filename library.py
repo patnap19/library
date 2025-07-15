@@ -388,6 +388,7 @@ class Library:
         print(f"Książka {title_of_new_book} została dodana do biblioteki")
 
     def show_stats(self):
+        clear_screen()
         borrowed_books = sum(book.borrowed for book in self.books)
         all_books = len(self.books)
         available_books = all_books - borrowed_books
@@ -406,8 +407,30 @@ class Library:
                 print(f"- {author}")
         else:
             print("Brak danych o autorach.")
+            
+class LibraryApp:
+    def __init__(self):
+        self.library = Library()
+        
+    def run(self):
+        while True:
+            clear_screen()
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Statystyki\n4. Wyjście")
+            choice = input("Wybierz opcję: ")
+            
+            if choice == "1":
+                self.library.print_books()
+            elif choice == "2":
+                self.library.add_book_to_library()
+            elif choice == "3":
+                self.library.show_stats()
+            elif choice == "4":
+                print("Do zobaczenia!")
+                break
+            else:
+                print("❌ Niepoprawny wybór.")
 
+            input("\nNaciśnij Enter, aby kontynuować...")
 
-new_lib = Library('books.json')
-new_lib.show_stats()
-new_lib.print_books()
+app = LibraryApp()
+app.run()
