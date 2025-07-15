@@ -349,6 +349,29 @@ class Library:
             except json.JSONDecodeError:
                 return []
 
+    def find_book_in_library(self):
+        clear_screen()
+        while True:
+            phrase_to_find = str(input("Wpisz tytuł książki, której szukasz: "))
+            if not phrase_to_find:
+                clear_screen()
+                print("Nie podano frazy do odnalezienia, spróbuj ponownie.")
+            else:
+                break
+
+        filtered_books = []
+        for book in self.books:
+            if phrase_to_find.lower() in book.title.lower():
+                filtered_books.append(book)
+
+        if not filtered_books:
+            clear_screen()
+            print(f'Niestety, nie odnaleziono żadnej książki związanej z frazą "{phrase_to_find}".')
+        else:
+            clear_screen()
+            print(f'Książki pasujące do frazy "{phrase_to_find}": ')
+            self.display_books(filtered_books)
+
     def save_books(self):
         with open(self.file_path, 'w', encoding='utf-8') as file:
             json.dump([
@@ -361,20 +384,25 @@ class Library:
                     'borrowed': book.borrowed
                 } for book in self.books
             ], file, ensure_ascii=False, indent=4)
+            
+    def display_books(self, books_to_display):
+        table_with_books = prettytable.PrettyTable()
+        table_with_books.field_names = ['Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
+        for book in books_to_display:
+            table_with_books.add_row(
+                [book.title, book.author, book.year, book.genre, 'Tak' if book.borrowed else 'Nie']
+            )
+            table_with_books.add_divider()
+        print(table_with_books)
 
     def print_books(self):
         clear_screen()
         if not self.books:
             print("Brak książek w bibliotece.")
             return
-        table_with_books = prettytable.PrettyTable()
-        table_with_books.field_names = ['Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
-        for book in self.books:
-            table_with_books.add_row(
-                [book.title, book.author, book.year, book.genre, 'Tak' if book.borrowed else 'Nie']
-            )
-            table_with_books.add_divider()
-        print(table_with_books)
+        else:
+            self.display_books(self.books)
+        
 
     def add_book_to_library(self):
         clear_screen()
@@ -415,16 +443,18 @@ class LibraryApp:
     def run(self):
         while True:
             clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Statystyki\n4. Wyjście")
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Znajdź książkę\n4. Statystyki\n5. Wyjście")
             choice = input("Wybierz opcję: ")
-            
+
             if choice == "1":
                 self.library.print_books()
             elif choice == "2":
                 self.library.add_book_to_library()
-            elif choice == "3":
-                self.library.show_stats()
+            elif choice == '3':
+                self.library.find_book_in_library()
             elif choice == "4":
+                self.library.show_stats()
+            elif choice == "5":
                 print("Do zobaczenia!")
                 break
             else:
