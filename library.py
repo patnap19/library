@@ -2,6 +2,7 @@ import json
 import os
 import prettytable
 from collections import Counter
+import uuid
 # from datetime import datetime
 
 # def clear_screen():
@@ -286,10 +287,12 @@ from collections import Counter
 
 # if __name__ == "__main__":
 #     library()
-    
+def clear_screen():
+    os.system('cls' if os.name == 'nt' else 'clear')
     
 class Book:
-    def __init__(self, title, author, year, genre, borrowed = False):
+    def __init__(self, title, author, year, genre, borrowed=False, book_id=None):
+        self.id = book_id or str(uuid.uuid4())
         self.title = title
         self.author = author
         self.year = year
@@ -326,8 +329,22 @@ class Library:
                 ) for book in data]
             except json.JSONDecodeError:
                 return []
-    
+            
+    def save_books(self):
+        with open(self.file_path, 'w', encoding='utf-8') as file:
+            json.dump([
+                {
+                    'id': book.id,
+                    'tytuł': book.title,
+                    'autor': book.author,
+                    'rok': book.year,
+                    'gatunek': book.genre,
+                    'wypozyczona': book.borrowed
+                } for book in self.books
+            ], file, ensure_ascii=False, indent=4)
+        
     def print_books(self):
+        clear_screen()
         table_with_books = prettytable.PrettyTable()
         table_with_books.field_names = ['Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
         for book in self.books:
@@ -359,5 +376,5 @@ class Library:
 
 
 new_lib = Library('books.json')
-new_lib.print_books()
 new_lib.show_stats()
+new_lib.print_books()

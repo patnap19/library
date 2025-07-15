@@ -1,5 +1,6 @@
 [
     {
+        "id": "a63acbac-0313-4db9-9f95-f29989cfa49c",
         "tytuł": "Wiedźmin: Ostatnie życzenie",
         "autor": "Andrzej Sapkowski",
         "rok": 1993,
@@ -7,6 +8,7 @@
         "wypozyczona": false
     },
     {
+        "id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
         "tytuł": "Wiedźmin: Miecz przeznaczenia",
         "autor": "Andrzej Sapkowski",
         "rok": 1992,
@@ -14,6 +16,7 @@
         "wypozyczona": false
     },
     {
+        "id": "d93ba2cd-c2e5-4f65-9855-49e01f0ff9c8",
         "tytuł": "Wiedźmin: Krew elfów",
         "autor": "Andrzej Sapkowski",
         "rok": 1994,
@@ -21,6 +24,7 @@
         "wypozyczona": false
     },
     {
+        "id": "87213e0f-85ee-41b1-bb73-71036e79c4ad",
         "tytuł": "Lalka",
         "autor": "Bolesław Prus",
         "rok": 1890,
@@ -28,6 +32,7 @@
         "wypozyczona": true
     },
     {
+        "id": "74377011-796e-4ac8-a361-faec04304cb4",
         "tytuł": "Pan Tadeusz",
         "autor": "Adam Mickiewicz",
         "rok": 1834,
@@ -35,6 +40,7 @@
         "wypozyczona": false
     },
     {
+        "id": "ac870885-560a-47c8-b8bd-5008504c6bae",
         "tytuł": "1984",
         "autor": "George Orwell",
         "rok": 1949,
@@ -42,6 +48,7 @@
         "wypozyczona": false
     },
     {
+        "id": "69c2dd8b-2181-4cd0-a749-6c1a8c183a77",
         "tytuł": "Rok 1984",
         "autor": "George Orwell",
         "rok": 1949,
@@ -49,6 +56,7 @@
         "wypozyczona": false
     },
     {
+        "id": "3aaef14a-16d6-49c1-add5-e65dc30b92ed",
         "tytuł": "Folwark zwierzęcy",
         "autor": "George Orwell",
         "rok": 1945,
@@ -56,6 +64,7 @@
         "wypozyczona": false
     },
     {
+        "id": "7b850972-d0a7-4225-800c-5d4958c21af0",
         "tytuł": "Zbrodnia i kara",
         "autor": "Fiodor Dostojewski",
         "rok": 1866,
@@ -63,6 +72,7 @@
         "wypozyczona": false
     },
     {
+        "id": "a6556dbc-d872-4d74-8e03-86520b064215",
         "tytuł": "Bracia Karamazow",
         "autor": "Fiodor Dostojewski",
         "rok": 1880,
@@ -70,6 +80,7 @@
         "wypozyczona": false
     },
     {
+        "id": "d0766312-5308-4036-acb1-a7392bcbe4d0",
         "tytuł": "Potop",
         "autor": "Henryk Sienkiewicz",
         "rok": 1840,
@@ -77,6 +88,7 @@
         "wypozyczona": false
     },
     {
+        "id": "1b552406-d47b-41f7-a80e-fc964add8300",
         "tytuł": "Harry Potter I Kamień Filozoficzny ",
         "autor": "J.K. Rowling",
         "rok": 2001,
@@ -84,6 +96,7 @@
         "wypozyczona": false
     },
     {
+        "id": "2bf2df8d-91fb-4a5b-894e-95c66522d55e",
         "tytuł": "Harry Potter I Komnata Tajemnic",
         "autor": "J.K. Rowling",
         "rok": 2002,
