@@ -289,6 +289,10 @@ class Library:
             self.display_books(books_to_filter)
         else:
             print("❌ Nie znaleziono książek pasujących do wszystkich filtrów.")
+            
+    def borrow_book_handler(self):
+        available_books = [book for book in self.books if not book.borrowed]
+        self.display_books(available_books)
         
 class LibraryApp:
     def __init__(self):
@@ -308,6 +312,8 @@ class LibraryApp:
                 self.library.filter_books()
             elif choice == '4':
                 self.library.show_stats()
+            elif choice == '5':
+                self.library.borrow_book_handler()
             elif choice == "0":
                 print("Do zobaczenia!")
                 break
