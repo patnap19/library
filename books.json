@@ -1,106 +1,106 @@
 [
     {
         "id": "a63acbac-0313-4db9-9f95-f29989cfa49c",
-        "tytuł": "Wiedźmin: Ostatnie życzenie",
-        "autor": "Andrzej Sapkowski",
-        "rok": 1993,
-        "gatunek": "Fantasy",
-        "wypozyczona": false
+        "title": "Wiedźmin: Ostatnie życzenie",
+        "author": "Andrzej Sapkowski",
+        "year": 1993,
+        "genre": "Fantasy",
+        "borrowed": false
     },
     {
         "id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
-        "tytuł": "Wiedźmin: Miecz przeznaczenia",
-        "autor": "Andrzej Sapkowski",
-        "rok": 1992,
-        "gatunek": "Fantasy",
-        "wypozyczona": false
+        "title": "Wiedźmin: Miecz przeznaczenia",
+        "author": "Andrzej Sapkowski",
+        "year": 1992,
+        "genre": "Fantasy",
+        "borrowed": false
     },
     {
         "id": "d93ba2cd-c2e5-4f65-9855-49e01f0ff9c8",
-        "tytuł": "Wiedźmin: Krew elfów",
-        "autor": "Andrzej Sapkowski",
-        "rok": 1994,
-        "gatunek": "Fantasy",
-        "wypozyczona": false
+        "title": "Wiedźmin: Krew elfów",
+        "author": "Andrzej Sapkowski",
+        "year": 1994,
+        "genre": "Fantasy",
+        "borrowed": false
     },
     {
         "id": "87213e0f-85ee-41b1-bb73-71036e79c4ad",
-        "tytuł": "Lalka",
-        "autor": "Bolesław Prus",
-        "rok": 1890,
-        "gatunek": "Powieść",
-        "wypozyczona": true
+        "title": "Lalka",
+        "author": "Bolesław Prus",
+        "year": 1890,
+        "genre": "Powieść",
+        "borrowed": true
     },
     {
         "id": "74377011-796e-4ac8-a361-faec04304cb4",
-        "tytuł": "Pan Tadeusz",
-        "autor": "Adam Mickiewicz",
-        "rok": 1834,
-        "gatunek": "Epopeja narodowa",
-        "wypozyczona": false
+        "title": "Pan Tadeusz",
+        "author": "Adam Mickiewicz",
+        "year": 1834,
+        "genre": "Epopeja narodowa",
+        "borrowed": false
     },
     {
         "id": "ac870885-560a-47c8-b8bd-5008504c6bae",
-        "tytuł": "1984",
-        "autor": "George Orwell",
-        "rok": 1949,
-        "gatunek": "Dystopia",
-        "wypozyczona": false
+        "title": "1984",
+        "author": "George Orwell",
+        "year": 1949,
+        "genre": "Dystopia",
+        "borrowed": false
     },
     {
         "id": "69c2dd8b-2181-4cd0-a749-6c1a8c183a77",
-        "tytuł": "Rok 1984",
-        "autor": "George Orwell",
-        "rok": 1949,
-        "gatunek": "Dystopia",
-        "wypozyczona": false
+        "title": "Rok 1984",
+        "author": "George Orwell",
+        "year": 1949,
+        "genre": "Dystopia",
+        "borrowed": false
     },
     {
         "id": "3aaef14a-16d6-49c1-add5-e65dc30b92ed",
-        "tytuł": "Folwark zwierzęcy",
-        "autor": "George Orwell",
-        "rok": 1945,
-        "gatunek": "Satyra polityczna",
-        "wypozyczona": false
+        "title": "Folwark zwierzęcy",
+        "author": "George Orwell",
+        "year": 1945,
+        "genre": "Satyra polityczna",
+        "borrowed": false
     },
     {
         "id": "7b850972-d0a7-4225-800c-5d4958c21af0",
-        "tytuł": "Zbrodnia i kara",
-        "autor": "Fiodor Dostojewski",
-        "rok": 1866,
-        "gatunek": "Powieść psychologiczna",
-        "wypozyczona": false
+        "title": "Zbrodnia i kara",
+        "author": "Fiodor Dostojewski",
+        "year": 1866,
+        "genre": "Powieść psychologiczna",
+        "borrowed": false
     },
     {
         "id": "a6556dbc-d872-4d74-8e03-86520b064215",
-        "tytuł": "Bracia Karamazow",
-        "autor": "Fiodor Dostojewski",
-        "rok": 1880,
-        "gatunek": "Powieść filozoficzna",
-        "wypozyczona": false
+        "title": "Bracia Karamazow",
+        "author": "Fiodor Dostojewski",
+        "year": 1880,
+        "genre": "Powieść filozoficzna",
+        "borrowed": false
     },
     {
         "id": "d0766312-5308-4036-acb1-a7392bcbe4d0",
-        "tytuł": "Potop",
-        "autor": "Henryk Sienkiewicz",
-        "rok": 1840,
-        "gatunek": "Powieść",
-        "wypozyczona": false
+        "title": "Potop",
+        "author": "Henryk Sienkiewicz",
+        "year": 1840,
+        "genre": "Powieść",
+        "borrowed": false
     },
     {
         "id": "1b552406-d47b-41f7-a80e-fc964add8300",
-        "tytuł": "Harry Potter I Kamień Filozoficzny ",
-        "autor": "J.K. Rowling",
-        "rok": 2001,
-        "gatunek": "Fantasy",
-        "wypozyczona": false
+        "title": "Harry Potter I Kamień Filozoficzny ",
+        "author": "J.K. Rowling",
+        "year": 2001,
+        "genre": "Fantasy",
+        "borrowed": false
     },
     {
         "id": "2bf2df8d-91fb-4a5b-894e-95c66522d55e",
-        "tytuł": "Harry Potter I Komnata Tajemnic",
-        "autor": "J.K. Rowling",
-        "rok": 2002,
-        "gatunek": "Fantasy",
-        "wypozyczona": false
+        "title": "Harry Potter I Komnata Tajemnic",
+        "author": "J.K. Rowling",
+        "year": 2002,
+        "genre": "Fantasy",
+        "borrowed": false
     }
 ]

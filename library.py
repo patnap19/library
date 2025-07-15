@@ -252,7 +252,7 @@ import uuid
 #         print("Zwróciłeś książkę")
 #         log_action("Zwrócono", returned_book['tytuł'])
 #         print_book(returned_book)
-    
+
 
 # def library():
 
@@ -290,6 +290,24 @@ import uuid
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
     
+def get_valid_text(prompt):
+    while True:
+        user_input = input(prompt).strip()
+        if not user_input:
+            print("❌ To pole nie może być puste. Spróbuj ponownie.")
+        else:
+            return user_input
+        
+def get_valid_number(prompt):
+    while True:
+        user_input = input(prompt)
+        if not user_input:
+            print("❌ To pole nie może być puste. Spróbuj ponownie.")
+        elif not user_input.isdigit():
+            print("❌ To pole powinno być liczbą. Spróbuj ponownie.")
+        else:
+            return int(user_input)
+
 class Book:
     def __init__(self, title, author, year, genre, borrowed=False, book_id=None):
         self.id = book_id or str(uuid.uuid4())
@@ -298,12 +316,12 @@ class Book:
         self.year = year
         self.genre = genre
         self.borrowed = borrowed
-        
+
     def borrow_book(self):
         if self.borrowed:
             print("Książka jest już wypożyczona")
         self.borrowed = True
-    
+
     def return_book(self):
         if not self.borrowed:
             print("Książka nie była wypożyczona")
@@ -321,30 +339,34 @@ class Library:
             try:
                 data = json.load(file)
                 return [Book(
-                    title=book['tytuł'],
-                    author=book['autor'],
-                    year=book['rok'],
-                    genre=book['gatunek'],
-                    borrowed=book['wypozyczona']
+                    title=book['title'],
+                    author=book['author'],
+                    year=book['year'],
+                    genre=book['genre'],
+                    borrowed=book['borrowed'],
+                    book_id=book.get('id')
                 ) for book in data]
             except json.JSONDecodeError:
                 return []
-            
+
     def save_books(self):
         with open(self.file_path, 'w', encoding='utf-8') as file:
             json.dump([
                 {
                     'id': book.id,
-                    'tytuł': book.title,
-                    'autor': book.author,
-                    'rok': book.year,
-                    'gatunek': book.genre,
-                    'wypozyczona': book.borrowed
+                    'title': book.title,
+                    'author': book.author,
+                    'year': book.year,
+                    'genre': book.genre,
+                    'borrowed': book.borrowed
                 } for book in self.books
             ], file, ensure_ascii=False, indent=4)
-        
+
     def print_books(self):
         clear_screen()
+        if not self.books:
+            print("Brak książek w bibliotece.")
+            return
         table_with_books = prettytable.PrettyTable()
         table_with_books.field_names = ['Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
         for book in self.books:
@@ -353,13 +375,24 @@ class Library:
             )
             table_with_books.add_divider()
         print(table_with_books)
-        
+
+    def add_book_to_library(self):
+        clear_screen()
+        title_of_new_book = get_valid_text("Podaj tytuł książki: ")
+        author_of_new_book = get_valid_text("Podaj nazwisko autora: ")
+        year_of_new_book = get_valid_number("Podaj rok wydania książki: ")
+        genre_of_new_book = get_valid_text("Podaj gatunek książki: ")
+        new_book = Book(title= title_of_new_book, author= author_of_new_book, year= year_of_new_book, genre= genre_of_new_book)
+        self.books.append(new_book)
+        self.save_books()
+        print(f"Książka {title_of_new_book} została dodana do biblioteki")
+
     def show_stats(self):
         borrowed_books = sum(book.borrowed for book in self.books)
         all_books = len(self.books)
         available_books = all_books - borrowed_books
         the_most_books_author = Counter(book.author for book in self.books)
-        
+
         print(f"📚 Łączna liczba książek: {all_books}")
         print(f"✅ Dostępnych: {available_books}")
         print(f"📕 Wypożyczonych: {borrowed_books}\n")
