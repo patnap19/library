@@ -3,18 +3,6 @@ import os
 import prettytable
 from collections import Counter
 import uuid
-# from datetime import datetime
-
-# def log_action(action, book_title):
-#     log_history = load_file(LOG_HISTORY_FILE)
-#     new_log = {
-#         'time': datetime.now().strftime("[%Y-%m-%d %H:%M:%S]"),
-#         'action': action,
-#         'book_title': book_title
-#     }
-#     log_history.append(new_log)
-#     with open(LOG_HISTORY_FILE, 'w', encoding="utf-8") as file:
-#         json.dump(log_history, file, ensure_ascii=False, indent=4)
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
