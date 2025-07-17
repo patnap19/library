@@ -230,12 +230,19 @@ class Library:
             
     def display_books(self, books_to_display):
         table_with_books = prettytable.PrettyTable()
-        table_with_books.field_names = ['Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
-        for book in books_to_display:
-            table_with_books.add_row(
-                [book.title, book.author, book.year, book.genre, 'Tak' if book.borrowed else 'Nie']
-            )
+        table_with_books.field_names = ['Nr', 'Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
+        
+        for index, book in enumerate(books_to_display, start=1):
+            table_with_books.add_row([
+                index,
+                book.title,
+                book.author,
+                book.year,
+                book.genre,
+                'Tak' if book.borrowed else 'Nie'
+            ])
             table_with_books.add_divider()
+        
         print(table_with_books)
 
     def print_all_books(self):
