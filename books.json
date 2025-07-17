@@ -5,7 +5,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1993,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
@@ -13,7 +13,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1992,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "d93ba2cd-c2e5-4f65-9855-49e01f0ff9c8",

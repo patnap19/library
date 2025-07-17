@@ -17,60 +17,6 @@ import uuid
 #         json.dump(log_history, file, ensure_ascii=False, indent=4)
 
 
-
-
-# # def borrow_book(index_of_book):
-# #     data = load_file(BOOKS_FILE)
-
-# #     if 1 <= index_of_book <= len(data):
-# #         book = data[index_of_book - 1]
-# #         if book['wypozyczona']:
-# #             print("Ta książka jest już wypożyczona.")
-# #             return None
-# #         data[index_of_book - 1]['wypozyczona'] = True
-# #         save_books(data)
-# #         return book
-# #     else:
-# #         print("Niepoprawny indeks książki.")
-# #         return None
-
-# def borrow_book_handler():
-#     clear_screen()
-#     all_books = load_file(BOOKS_FILE)
-#     available_books = [book for book in all_books if not book['wypozyczona']]
-
-#     if not available_books:
-#         print("Brak dostępnych książek do wypożyczenia.")
-#         print('-' * 30)
-#         return
-
-#     print("Wybierz książkę, którą chcesz wypożyczyć:")
-
-#     for i, book in enumerate(available_books, 1):
-#         print(f"{i}.")
-#         print_book(book)
-
-#     try:
-#         user_input = int(input("Twój wybór: "))
-#         if user_input < 1 or user_input > len(available_books):
-#             raise ValueError
-#     except ValueError:
-#         print("Nieprawidłowy wybór. Wprowadź poprawny numer z listy.")
-#         print('-' * 30)
-#         return
-
-#     selected_book = available_books[user_input - 1]
-#     original_index = all_books.index(selected_book)
-
-#     clear_screen()
-#     borrowed_book = borrow_book(original_index + 1)
-#     log_action('Wypożyczono', borrowed_book['tytuł'])
-#     if borrowed_book is None:
-#         print("Przenosimy Cię do Menu Głównego")
-#     else:
-#         print("Wypożyczona przez Ciebie książka to: ")
-#         print_book(borrowed_book)
-
 # # def return_book(index_of_book):
 # #     data = load_file(BOOKS_FILE)
 
@@ -190,6 +136,7 @@ class Library:
                     book_id=book.get('id')
                 ) for book in data]
             except json.JSONDecodeError:
+                print("❌ Błąd przy wczytywaniu pliku książek.")
                 return []
 
     def filter_by_field(self, books, field):
@@ -197,7 +144,7 @@ class Library:
         value = input(prompt).strip()
 
         if not value:
-            return books  # brak filtra, zwracamy bez zmian
+            return books
 
         if field == 'borrowed':
             value = value.lower()
@@ -296,39 +243,43 @@ class Library:
             self.display_books(books_to_filter)
         else:
             print("❌ Nie znaleziono książek pasujących do wszystkich filtrów.")
+            
+    def select_book(self, books_list):
+        while True:
+            try:
+                user_choice = int(input(f"Wybierz książkę, którą chcesz wypożyczyć wprowadzając numer książki od 1 do {len(books_list)} (wprowadzenie 0 spowoduje opuszczenie opcji): "))
+                if 1 <= user_choice <= len(books_list):
+                    return books_list[user_choice - 1]
+                elif user_choice == 0:
+                    return None
+                else:
+                    print("Podano niewłaściwy numer książki, spróbuj ponownie.")
+            except ValueError:
+                print('Nie podano numeru, pod którym znajduje się książka. Spróbuj ponownie')
 
     def borrow_book_handler(self):
         clear_screen()
         available_books = [book for book in self.books if not book.borrowed]
         self.display_books(available_books)
-        while True:
-            try:
-                user_choice = int(input(f"Wybierz książkę, którą chcesz wypożyczyć wprowadzając numer książki od 1 do {len(available_books)} (wprowadzenie 0 spowoduje opuszczenie opcji): "))
-                if 1 <= user_choice <= len(available_books):
-                    break
-                elif user_choice == 0:
+        selected_book = self.select_book(available_books)
+        if selected_book:
+            while True:
+                user_decision = input(f'Chcesz wypożyczyć następującą książkę\n "{selected_book.title}", której autorem jest: {selected_book.author}. Jesteś pewien(wpisz tak/nie?): ').lower()
+                if user_decision == 'tak':
+                    for book in self.books:
+                        if selected_book.id == book.id:
+                            book.borrow_book()
+                    print(f'Książka "{selected_book.title}" została wypożyczona')
+                    self.save_books()
                     return
+                elif user_decision == 'nie':
+                    print("Nie wybrano książki")
+                    break
+                    
                 else:
-                    print("Podano niewłaściwy numer książki, spróbuj ponownie.")
-            except ValueError:
-                print('Nie podano numeru, pod którym znajduje się książka. Spróbuj ponownie')
-        
-        while True:
-            user_decision = input(f'Chcesz wypożyczyć następującą książkę\n "{available_books[user_choice - 1].title}", której autorem jest: {available_books[user_choice - 1].author}. Jesteś pewien(wpisz tak/nie?): ').lower()
-            if user_decision == 'tak':
-                for book in self.books:
-                    if available_books[user_choice - 1].id == book.id:
-                        book.borrow_book()
-                print(f'Książka "{available_books[user_choice - 1].title}" została wypożyczona')
-                self.save_books()
-                return
-            elif user_decision == 'nie':
-                print("Nie wybrano książki")
-                break
-                
-            else:
-                print("Podano niewłaściwy wyraz, spróbuj ponownie.")
-        
+                    print("Podano niewłaściwy wyraz, spróbuj ponownie.")
+        else:
+            'Nie działa'
 
 
 
