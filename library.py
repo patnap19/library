@@ -3,6 +3,7 @@ import os
 import prettytable
 from collections import Counter
 import uuid
+from datetime import datetime
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -31,6 +32,15 @@ def get_valid_number(prompt):
             print("❌ To pole powinno być liczbą. Spróbuj ponownie.")
         else:
             return int(user_input)
+        
+class Log():
+    def __init__(self, log_id, book_id, action_type, action_time):
+        self.id = log_id or str(uuid.uuid4())
+        self.book_id = book_id
+        self.action_type = action_type
+        self.action_time = action_time or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
 
 class Book:
     def __init__(self, title, author, year, genre, borrowed=False, book_id=None):
