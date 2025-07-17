@@ -227,11 +227,11 @@ class Library:
                     'borrowed': book.borrowed
                 } for book in self.books
             ], file, ensure_ascii=False, indent=4)
-            
+
     def display_books(self, books_to_display):
         table_with_books = prettytable.PrettyTable()
         table_with_books.field_names = ['Nr', 'Tytuł', 'Autor', 'Rok wydania', 'Gatunek', 'Wypożyczona']
-        
+
         for index, book in enumerate(books_to_display, start=1):
             table_with_books.add_row([
                 index,
@@ -242,7 +242,7 @@ class Library:
                 'Tak' if book.borrowed else 'Nie'
             ])
             table_with_books.add_divider()
-        
+
         print(table_with_books)
 
     def print_all_books(self):
@@ -251,7 +251,7 @@ class Library:
             self.display_books(self.books)
         else:
             print("Brak książek w bibliotece.")
-            
+
 
     def add_book_to_library(self):
         clear_screen()
@@ -284,7 +284,7 @@ class Library:
                 print(f"- {author}")
         else:
             print("Brak danych o autorach.")
-        
+
     def filter_books(self):
         books_to_filter = self.books
         for field in FILTERS_FOR_BOOKS:
@@ -296,11 +296,40 @@ class Library:
             self.display_books(books_to_filter)
         else:
             print("❌ Nie znaleziono książek pasujących do wszystkich filtrów.")
-            
+
     def borrow_book_handler(self):
+        clear_screen()
         available_books = [book for book in self.books if not book.borrowed]
         self.display_books(available_books)
+        while True:
+            try:
+                user_choice = int(input(f"Wybierz książkę, którą chcesz wypożyczyć wprowadzając numer książki od 1 do {len(available_books)} (wprowadzenie 0 spowoduje opuszczenie opcji): "))
+                if 1 <= user_choice <= len(available_books):
+                    break
+                elif user_choice == 0:
+                    return
+                else:
+                    print("Podano niewłaściwy numer książki, spróbuj ponownie")
+            except ValueError:
+                print('Nie podano numeru, pod którą znajduje się książka, spróbuj ponownie')
+        user_decision = input(f'Chcesz wypożyczyć następującą książkę\n "{available_books[user_choice - 1].title}", której autorem jest: {available_books[user_choice - 1].author}. Jesteś pewien(wpisz tak/nie?').lower()
+        while True:
+            if user_decision == 'tak':
+                for book in self.books:
+                    if available_books[user_choice - 1].id == book.id:
+                        book.borrow_book()
+                print(f'Książka "{available_books[user_choice - 1].title}" została wypożyczona')
+                return
+            elif user_decision == 'nie':
+                print("Nastąpi powrót do menu.")
+                break
+                
+            else:
+                print("Podano niewłaściwy wyraz, spróbuj ponownie.")
         
+
+
+
 class LibraryApp:
     def __init__(self):
         self.library = Library()
