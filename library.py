@@ -234,8 +234,6 @@ class Library:
         seletced_book = self.select_book(self.books)
         if seletced_book:
             for index, element in enumerate(FILTERS_FOR_BOOKS, start=1):
-                if element == 'borrowed':
-                    continue
                 print(f'{index}. {FILTERS_FOR_BOOKS[element].title()}')
             print(f'Wybrana książka to: "{seletced_book.title}"')
             while True:
