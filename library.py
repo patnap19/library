@@ -6,14 +6,14 @@ import uuid
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
-    
+
 FILTERS_FOR_BOOKS = {'title': 'tytuł',
     'author': 'autor', 
     'year': 'rok', 
     'genre': 'gatunek',
     'borrowed': 'wypożyczona'
 }
-    
+
 def get_valid_text(prompt):
     while True:
         user_input = input(prompt).strip()
@@ -282,7 +282,23 @@ class Library:
                     break
                 else:
                     print("Podano niewłaściwą wartość")
-
+    
+    def delete_book_from_library(self):
+        self.display_books(self.books)
+        selected_book = self.select_book(self.books)
+        if selected_book:
+            while True:
+                user_choice = input(f"Czy książka {selected_book.title} ma zostać usunięta z biblioteki? (wpisz tak/nie): ").lower()
+                if user_choice == 'tak':
+                    self.books.remove(selected_book)
+                    self.save_books()
+                    print("Książka została usunięta z biblioteki.")
+                    break
+                elif user_choice == 'nie':
+                    print(f'Książka "{selected_book.title}" pozostanie w bibliotece.')
+                    break
+                else:
+                    print('Proszę podać słowo "tak" lub "nie".')
 
 class LibraryApp:
     def __init__(self):
@@ -291,7 +307,7 @@ class LibraryApp:
     def run(self):
         while True:
             clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n6. Zwróć książkę\n7. Edytuj książkę\n0. Wyjście")
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n6. Zwróć książkę\n7. Edytuj książkę\n8. Usuń książkę\n0. Wyjście")
             choice = input("Wybierz opcję: ")
 
             if choice == "1":
@@ -308,6 +324,8 @@ class LibraryApp:
                 self.library.book_action_handler('return')
             elif choice == '7':
                 self.library.edit_book_data()
+            elif choice == '8':
+                self.library.delete_book_from_library()
             elif choice == "0":
                 print("Do zobaczenia!")
                 break
