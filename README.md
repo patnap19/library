@@ -1,43 +1,50 @@
-# 📚 Szkolna Biblioteka – Konsolowa aplikacja Python
+# 📚 Szkolna Biblioteka – Konsolowa aplikacja w Pythonie
 
-Aplikacja umożliwia przeglądanie, wyszukiwanie oraz dodawanie książek do biblioteki szkolnej, która jest przechowywana w pliku JSON.
+Konsolowa aplikacja do zarządzania biblioteką szkolną. Pozwala na przeglądanie, filtrowanie, edytowanie oraz wypożyczanie książek, które są przechowywane w pliku JSON.
 
 ---
 
 ## ✅ Funkcje
 
-- 📖 Wyświetlanie wszystkich książek w bibliotece
-- 🔍 Wyszukiwanie książek według:
-  - autora
-  - tytułu
-  - gatunku
-  - roku wydania
-- ➕ Dodawanie nowej książki (z walidacją roku wydania)
-- 🚫 Sprawdzanie, czy książka już istnieje przed dodaniem
-- 🧾 Dane przechowywane w pliku `books.json` w formacie JSON
+- 📖 Wyświetlanie wszystkich książek w bibliotece w formie tabeli
+- 🔍 Filtrowanie książek po wielu kryteriach:
+  - tytuł
+  - autor
+  - rok wydania
+  - gatunek
+  - status wypożyczenia
+- ➕ Dodawanie nowej książki (z walidacją danych)
+- ✍ Edycja danych książki (tytuł, autor, rok, gatunek)
+- 🔀 Wypożyczanie i zwracanie książek
+- 📊 Statystyki biblioteki (liczba książek, dostępnych, najczęściej występujący autor)
+- 📂 Dane zapisywane i wczytywane z pliku `books.json`
 
 ---
 
 ## 🛠 Wymagania
 
-- Python 3.x
-- Plik `books.json` z przykładową strukturą (jeśli nie istnieje, należy go utworzyć ręcznie)
+- Python 3.8+
+- Biblioteka `prettytable` do wyświetlania książek w formie tabeli:
 
-Przykład zawartości `books.json`:
+```bash
+pip install prettytable
+```
+
+---
+
+## 📂 Przykład zawartości `books.json`
+
+Aplikacja sama tworzy plik `books.json`, jeśli go nie ma. Przykładowa struktura:
 
 ```json
 [
   {
-    "tytuł": "Wiedźmin",
-    "autor": "Andrzej Sapkowski",
-    "rok": 1993,
-    "gatunek": "Fantasy"
-  },
-  {
-    "tytuł": "Pan Tadeusz",
-    "autor": "Adam Mickiewicz",
-    "rok": 1834,
-    "gatunek": "Epopeja"
+    "id": "1234-uuid",
+    "title": "Wiedźmin",
+    "author": "Andrzej Sapkowski",
+    "year": 1993,
+    "genre": "Fantasy",
+    "borrowed": false
   }
 ]
 ```
@@ -46,7 +53,7 @@ Przykład zawartości `books.json`:
 
 ## 🚀 Uruchomienie aplikacji
 
-1. Upewnij się, że masz plik `books.json` w tym samym folderze co plik `.py`.
+1. Upewnij się, że plik `books.json` (jeśli istnieje) znajduje się w tym samym folderze co plik `.py`
 2. Uruchom aplikację:
 
 ```bash
@@ -55,27 +62,40 @@ python biblioteka.py
 
 ---
 
-## 💡 Przykład działania
+## 🧪 Przykładowe opcje w menu
 
 ```
-Witaj w naszej szkolnej bibliotece! Co chciałbyś zrobić?
-
-1. Wyświetl wszystkie książki.
-2. Wyszukaj książki.
-3. Dodaj książkę.
-0. Zakończ pracę.
-
-Twój wybór: 1
+1. Pokaż książki
+2. Dodaj książkę
+3. Filtruj książki
+4. Statystyki
+5. Wypożycz książkę
+6. Zwróć książkę
+7. Edytuj książkę
+0. Wyjście
 ```
 
 ---
 
 ## 🧹 Planowane funkcje
 
-- Rejestracja wypożyczeń książek
-- Historia operacji użytkownika
-- Usuwanie książek z biblioteki
-- Edycja informacji o książkach
-- Dodanie obsługi wielu użytkowników
-- Eksport do CSV
-- Sortowanie wyników wyszukiwania
+- 📅 Import i eksport danych (CSV lub JSON)
+- 👥 Obsługa wielu użytkowników
+- 🕒 Historia wypożyczeń
+- 🔍 Sortowanie wyników filtrowania
+- 🗑 Usuwanie książek
+- 📌 Ulubione książki / oznaczenia
+
+---
+
+## 🧠 Struktura projektu (OOP)
+
+- `Book` – reprezentuje pojedynczą książkę
+- `Library` – zarządza książkami, plikiem JSON oraz operacjami (dodawanie, filtrowanie, wypożyczanie itp.)
+- `LibraryApp` – główna aplikacja sterująca menu i przepływem programu
+
+---
+
+## 📌 Licencja
+
+Projekt stworzony do celów edukacyjnych. Można dowolnie modyfikować i rozwijać 🚀
