@@ -309,19 +309,21 @@ class Library:
                 elif user_choice == 0:
                     return
                 else:
-                    print("Podano niewłaściwy numer książki, spróbuj ponownie")
+                    print("Podano niewłaściwy numer książki, spróbuj ponownie.")
             except ValueError:
-                print('Nie podano numeru, pod którą znajduje się książka, spróbuj ponownie')
-        user_decision = input(f'Chcesz wypożyczyć następującą książkę\n "{available_books[user_choice - 1].title}", której autorem jest: {available_books[user_choice - 1].author}. Jesteś pewien(wpisz tak/nie?').lower()
+                print('Nie podano numeru, pod którym znajduje się książka. Spróbuj ponownie')
+        
         while True:
+            user_decision = input(f'Chcesz wypożyczyć następującą książkę\n "{available_books[user_choice - 1].title}", której autorem jest: {available_books[user_choice - 1].author}. Jesteś pewien(wpisz tak/nie?): ').lower()
             if user_decision == 'tak':
                 for book in self.books:
                     if available_books[user_choice - 1].id == book.id:
                         book.borrow_book()
                 print(f'Książka "{available_books[user_choice - 1].title}" została wypożyczona')
+                self.save_books()
                 return
             elif user_decision == 'nie':
-                print("Nastąpi powrót do menu.")
+                print("Nie wybrano książki")
                 break
                 
             else:
