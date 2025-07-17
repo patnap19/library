@@ -16,57 +16,6 @@ import uuid
 #     with open(LOG_HISTORY_FILE, 'w', encoding="utf-8") as file:
 #         json.dump(log_history, file, ensure_ascii=False, indent=4)
 
-
-# # def return_book(index_of_book):
-# #     data = load_file(BOOKS_FILE)
-
-# #     if 1 <= index_of_book <= len(data):
-# #         book = data[index_of_book - 1]
-# #         if not book['wypozyczona']:
-# #             print("Ta książka nie jest wypożyczona.")
-# #             return None
-# #         data[index_of_book - 1]['wypozyczona'] = False
-# #         save_books(data)
-# #         return book
-# #     else:
-# #         print("Niepoprawny indeks książki.")
-# #         return None
-            
-# def return_book_handler():
-#     clear_screen()
-#     all_books = load_file(BOOKS_FILE)
-#     borrowed_books = [book for book in all_books if book['wypozyczona']]
-#     if not borrowed_books:
-#         print("Brak wypożyczonyhch książek.")
-#         print('-' * 30)
-#         return
-#     print("Lista książek, które musisz zwrócić: ")
-#     for i, book in enumerate(borrowed_books, 1):
-#         print(f"{i}.")
-#         print_book(book)
-
-#     try:
-#         user_input = int(input("Twój wybór: "))
-#         if user_input < 1 or user_input > len(borrowed_books):
-#             raise ValueError
-#     except ValueError:
-#         clear_screen()
-#         print("Nieprawidłowy wybór. Wprowadź poprawny numer z listy.")
-#         print('-' * 30)
-#         return
-
-#     selected_book = borrowed_books[user_input - 1]
-#     original_index = all_books.index(selected_book)
-
-#     clear_screen()
-#     returned_book = return_book(original_index + 1)
-#     if returned_book is None:
-#         print("Przenosimy Cię do Menu Głównego")
-#     else:
-#         print("Zwróciłeś książkę")
-#         log_action("Zwrócono", returned_book['tytuł'])
-#         print_book(returned_book)
-
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
     
@@ -115,6 +64,16 @@ class Book:
             print("Książka nie była wypożyczona")
             return
         self.borrowed = False
+        
+    def change_property(self, property_to_change):
+        if property_to_change == 'year':
+            new_value = get_valid_number(f"Podaj nowy {FILTERS_FOR_BOOKS[property_to_change]}, aktualnie to {getattr(self, property_to_change)}: ")
+        else:
+            new_value = get_valid_text(f"Podaj nowy {FILTERS_FOR_BOOKS[property_to_change]}:, aktualnie to {getattr(self, property_to_change)}: ")
+
+        setattr(self, property_to_change, new_value)
+        print(f"✅ Zmieniono {FILTERS_FOR_BOOKS[property_to_change]} na: {new_value}")
+
 
 class Library:
     def __init__(self, file_path='books.json'):
@@ -278,26 +237,64 @@ class Library:
                 else:
                     print("Podano niewłaściwy wyraz, spróbuj ponownie.")
                     
-    def return_book_handler(self):
+    def book_action_handler(self, action_type):
         clear_screen()
-        borrowed_books = [book for book in self.books if book.borrowed]
-        self.display_books(borrowed_books)
-        selected_book = self.select_book(borrowed_books)
+        if action_type == 'borrow':
+            books = [book for book in self.books if not book.borrowed]
+            action = 'wypożyczyć'
+        else:
+            books = [book for book in self.books if book.borrowed]
+            action = 'zwrócić'
+
+        self.display_books(books)
+        selected_book = self.select_book(books)
         if selected_book:
-            while True:
-                user_decision = input(f'Chcesz zwrócić następującą książkę\n "{selected_book.title}", której autorem jest: {selected_book.author}. Jesteś pewien(wpisz tak/nie?): ').lower()
-                if user_decision == 'tak':
-                    for book in self.books:
-                        if selected_book.id == book.id:
+            confirm = input(f'Chcesz {action} książkę "{selected_book.title}"? (tak/nie): ').lower()
+            if confirm == 'tak':
+                for book in self.books:
+                    if book.id == selected_book.id:
+                        if action_type == 'borrow':
+                            book.borrow_book()
+                            print(f'Książka została wypożyczona.')
+                        else:
                             book.return_book()
-                    print(f'Książka "{selected_book.title}" została zwrócona')
-                    self.save_books()
+                            print(f'Książka została zwrócona.')
+                
+                self.save_books()
+    
+    def edit_book_data(self):
+        self.display_books(self.books)
+        seletced_book = self.select_book(self.books)
+        if seletced_book:
+            for index, element in enumerate(FILTERS_FOR_BOOKS, start=1):
+                if element == 'borrowed':
+                    continue
+                print(f'{index}. {FILTERS_FOR_BOOKS[element].title()}')
+            print(f'Wybrana książka to: "{seletced_book.title}"')
+            while True:
+                user_choice = input(f"Który z elementów książki ma być zmienony? (podaj numer od 1 do {len(self.books)})(wprowadzenie 0 spowoduje opuszczenie opcji): ")
+                if user_choice == '0':
+                    print("")
                     return
-                elif user_decision == 'nie':
-                    print("Nie wybrano książki")
+                elif user_choice == '1':
+                    seletced_book.change_property('title')
+                    self.save_books()
+                    break
+                elif user_choice == '2':
+                    seletced_book.change_property('author')
+                    self.save_books()
+                    break
+                elif user_choice == '3':
+                    seletced_book.change_property('year')
+                    self.save_books()
+                    break
+                elif user_choice == '4':
+                    seletced_book.change_property('genre')
+                    self.save_books()
                     break
                 else:
-                    print("Podano niewłaściwy wyraz, spróbuj ponownie.")
+                    print("Podano niewłaściwą wartość")
+
 
 class LibraryApp:
     def __init__(self):
@@ -306,7 +303,7 @@ class LibraryApp:
     def run(self):
         while True:
             clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n6. Zwróć książkę\n0. Wyjście")
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n6. Zwróć książkę\n7. Edytuj książkę\n0. Wyjście")
             choice = input("Wybierz opcję: ")
 
             if choice == "1":
@@ -318,9 +315,11 @@ class LibraryApp:
             elif choice == '4':
                 self.library.show_stats()
             elif choice == '5':
-                self.library.borrow_book_handler()
+                self.library.book_action_handler('borrow')
             elif choice == '6':
-                self.library.return_book_handler()
+                self.library.book_action_handler('return')
+            elif choice == '7':
+                self.library.edit_book_data()
             elif choice == "0":
                 print("Do zobaczenia!")
                 break

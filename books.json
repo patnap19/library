@@ -5,7 +5,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1993,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
@@ -101,15 +101,15 @@
         "author": "J.K. Rowling",
         "year": 2002,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "d5014efa-3d9f-49ad-865e-56a39c98a90a",
-        "title": "Harry Potter i Więźień Askabanu",
+        "title": "Harry Potter i Więzień Askabanu",
         "author": "J.K. Rowling",
         "year": 2003,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "2021f58e-b446-4bb6-a413-7e50decefe28",
