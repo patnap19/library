@@ -204,27 +204,6 @@ class Library:
             except ValueError:
                 print('Nie podano numeru, pod którym znajduje się książka. Spróbuj ponownie')
 
-    def borrow_book_handler(self):
-        clear_screen()
-        available_books = [book for book in self.books if not book.borrowed]
-        self.display_books(available_books)
-        selected_book = self.select_book(available_books)
-        if selected_book:
-            while True:
-                user_decision = input(f'Chcesz wypożyczyć następującą książkę\n "{selected_book.title}", której autorem jest: {selected_book.author}. Jesteś pewien(wpisz tak/nie?): ').lower()
-                if user_decision == 'tak':
-                    for book in self.books:
-                        if selected_book.id == book.id:
-                            book.borrow_book()
-                    print(f'Książka "{selected_book.title}" została wypożyczona')
-                    self.save_books()
-                    return
-                elif user_decision == 'nie':
-                    print("Nie wybrano książki")
-                    break
-                else:
-                    print("Podano niewłaściwy wyraz, spróbuj ponownie.")
-                    
     def book_action_handler(self, action_type):
         clear_screen()
         if action_type == 'borrow':
@@ -285,17 +264,17 @@ class Library:
     
     def delete_book_from_library(self):
         self.display_books(self.books)
-        selected_book = self.select_book(self.books)
-        if selected_book:
+        seletced_book = self.select_book(self.books)
+        if seletced_book:
             while True:
-                user_choice = input(f"Czy książka {selected_book.title} ma zostać usunięta z biblioteki? (wpisz tak/nie): ").lower()
+                user_choice = input(f"Czy książka {seletced_book.title} ma zostać usunięta z biblioteki? (wpisz tak/nie): ").lower()
                 if user_choice == 'tak':
-                    self.books.remove(selected_book)
+                    self.books.remove(seletced_book)
                     self.save_books()
                     print("Książka została usunięta z biblioteki.")
                     break
                 elif user_choice == 'nie':
-                    print(f'Książka "{selected_book.title}" pozostanie w bibliotece.')
+                    print(f'Książka "{seletced_book.title}" pozostanie w bibliotece.')
                     break
                 else:
                     print('Proszę podać słowo "tak" lub "nie".')

@@ -118,5 +118,13 @@
         "year": 2004,
         "genre": "Fantasy",
         "borrowed": false
+    },
+    {
+        "id": "609cd6d1-56fb-4989-b275-d9fdc82143a4",
+        "title": "Harry Potter i Zakon Feniksa",
+        "author": "J.K. Rowling",
+        "year": 2006,
+        "genre": "Fantasy",
+        "borrowed": false
     }
 ]
