@@ -21,7 +21,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1994,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "87213e0f-85ee-41b1-bb73-71036e79c4ad",
@@ -109,7 +109,7 @@
         "author": "J.K. Rowling",
         "year": 2003,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "2021f58e-b446-4bb6-a413-7e50decefe28",

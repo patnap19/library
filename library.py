@@ -247,7 +247,7 @@ class Library:
     def select_book(self, books_list):
         while True:
             try:
-                user_choice = int(input(f"Wybierz książkę, którą chcesz wypożyczyć wprowadzając numer książki od 1 do {len(books_list)} (wprowadzenie 0 spowoduje opuszczenie opcji): "))
+                user_choice = int(input(f"Wybierz książkę wprowadzając numer książki od 1 do {len(books_list)} (wprowadzenie 0 spowoduje opuszczenie opcji): "))
                 if 1 <= user_choice <= len(books_list):
                     return books_list[user_choice - 1]
                 elif user_choice == 0:
@@ -275,13 +275,29 @@ class Library:
                 elif user_decision == 'nie':
                     print("Nie wybrano książki")
                     break
-                    
                 else:
                     print("Podano niewłaściwy wyraz, spróbuj ponownie.")
-        else:
-            'Nie działa'
-
-
+                    
+    def return_book_handler(self):
+        clear_screen()
+        borrowed_books = [book for book in self.books if book.borrowed]
+        self.display_books(borrowed_books)
+        selected_book = self.select_book(borrowed_books)
+        if selected_book:
+            while True:
+                user_decision = input(f'Chcesz zwrócić następującą książkę\n "{selected_book.title}", której autorem jest: {selected_book.author}. Jesteś pewien(wpisz tak/nie?): ').lower()
+                if user_decision == 'tak':
+                    for book in self.books:
+                        if selected_book.id == book.id:
+                            book.return_book()
+                    print(f'Książka "{selected_book.title}" została zwrócona')
+                    self.save_books()
+                    return
+                elif user_decision == 'nie':
+                    print("Nie wybrano książki")
+                    break
+                else:
+                    print("Podano niewłaściwy wyraz, spróbuj ponownie.")
 
 class LibraryApp:
     def __init__(self):
@@ -290,7 +306,7 @@ class LibraryApp:
     def run(self):
         while True:
             clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n0. Wyjście")
+            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n6. Zwróć książkę\n0. Wyjście")
             choice = input("Wybierz opcję: ")
 
             if choice == "1":
@@ -303,6 +319,8 @@ class LibraryApp:
                 self.library.show_stats()
             elif choice == '5':
                 self.library.borrow_book_handler()
+            elif choice == '6':
+                self.library.return_book_handler()
             elif choice == "0":
                 print("Do zobaczenia!")
                 break
