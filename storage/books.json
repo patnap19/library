@@ -21,7 +21,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1994,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "87213e0f-85ee-41b1-bb73-71036e79c4ad",
@@ -29,7 +29,7 @@
         "author": "Bolesław Prus",
         "year": 1890,
         "genre": "Powieść",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "74377011-796e-4ac8-a361-faec04304cb4",
@@ -61,7 +61,7 @@
         "author": "George Orwell",
         "year": 1945,
         "genre": "Satyra polityczna",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "7b850972-d0a7-4225-800c-5d4958c21af0",
@@ -85,7 +85,7 @@
         "author": "Henryk Sienkiewicz",
         "year": 1840,
         "genre": "Powieść",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "1b552406-d47b-41f7-a80e-fc964add8300",
@@ -101,7 +101,7 @@
         "author": "J.K. Rowling",
         "year": 2002,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "d5014efa-3d9f-49ad-865e-56a39c98a90a",
@@ -134,13 +134,5 @@
         "year": 2010,
         "genre": "Fantasy",
         "borrowed": false
-    },
-    {
-        "id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
-        "title": "Romeo i Julia",
-        "author": "Szekspir",
-        "year": 1800,
-        "genre": "Dramat",
-        "borrowed": true
     }
 ]

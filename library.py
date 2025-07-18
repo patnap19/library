@@ -1,109 +1,13 @@
 import json
-import os
+from utils import *
 import prettytable
 from collections import Counter
-import uuid
-from datetime import datetime
-
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-
-FILTERS_FOR_BOOKS = {'title': 'tytuł',
-    'author': 'autor', 
-    'year': 'rok', 
-    'genre': 'gatunek',
-    'borrowed': 'wypożyczona'
-}
-
-def get_valid_text(prompt):
-    while True:
-        user_input = input(prompt).strip()
-        if not user_input:
-            print("❌ To pole nie może być puste. Spróbuj ponownie.")
-        else:
-            return user_input
-        
-def get_valid_number(prompt):
-    while True:
-        user_input = input(prompt)
-        if not user_input:
-            print("❌ To pole nie może być puste. Spróbuj ponownie.")
-        elif not user_input.isdigit():
-            print("❌ To pole powinno być liczbą. Spróbuj ponownie.")
-        else:
-            return int(user_input)
-
-class Log:
-    def __init__(self, log_id, book_id, action_type, action_time):
-        self.id = log_id or str(uuid.uuid4())
-        self.book_id = book_id
-        self.action_type = action_type
-        self.action_time = action_time or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-class LogsManager:
-    def __init__(self, file_path = "logs.json"):
-        self.file_path = file_path
-        self.log_history = self.load_logs()
-
-    def load_logs(self):
-        if not os.path.exists(self.file_path):
-            return []
-        with open(self.file_path, 'r', encoding='utf-8') as file:
-            try:
-                data = json.load(file)
-                return [Log(
-                    log_id=log['id'],
-                    book_id = log['book_id'],
-                    action_type= log['action_type'],
-                    action_time= log['action_time']
-                ) for log in data]
-            except json.JSONDecodeError:
-                print("❌ Błąd przy wczytywaniu pliku logów.")
-                return []
-
-    def save_logs(self):
-        with open(self.file_path, 'w', encoding='utf-8') as file:
-            json.dump([log.__dict__ for log in self.log_history], file, ensure_ascii=False, indent=4)
-
-    def add_new_log(self, book_id, action_type):
-            new_log = Log(log_id=None, book_id=book_id, action_type=action_type, action_time=None)
-            self.log_history.append(new_log)
-            self.save_logs()
-
-
-class Book:
-    def __init__(self, title, author, year, genre, borrowed=False, book_id=None):
-        self.id = book_id or str(uuid.uuid4())
-        self.title = title
-        self.author = author
-        self.year = year
-        self.genre = genre
-        self.borrowed = borrowed
-
-    def borrow_book(self):
-        if self.borrowed:
-            print("Książka jest już wypożyczona")
-            return
-        self.borrowed = True
-
-    def return_book(self):
-        if not self.borrowed:
-            print("Książka nie była wypożyczona")
-            return
-        self.borrowed = False
-        
-    def change_property(self, property_to_change):
-        if property_to_change == 'year':
-            new_value = get_valid_number(f"Podaj nowy {FILTERS_FOR_BOOKS[property_to_change]}, aktualnie to {getattr(self, property_to_change)}: ")
-        else:
-            new_value = get_valid_text(f"Podaj nowy {FILTERS_FOR_BOOKS[property_to_change]}:, aktualnie to {getattr(self, property_to_change)}: ")
-
-        setattr(self, property_to_change, new_value)
-        print(f"✅ Zmieniono {FILTERS_FOR_BOOKS[property_to_change]} na: {new_value}")
+from book import Book
+from logs import LogsManager
 
 
 class Library:
-    def __init__(self, file_path='books.json'):
+    def __init__(self, file_path='storage/books.json'):
         self.file_path = file_path
         self.books = self.load_books()
         self.logs_manager = LogsManager()
@@ -327,13 +231,11 @@ class Library:
             if book.id == book_id:
                 return book
         return None
-                    
-    def display_logs(self, filter = None):
+
+    def display_logs(self, filter = None, limit = 10):
         logs_table = prettytable.PrettyTable()
         logs_table.field_names = ['Nr', 'Rodzaj akcji', 'Książka', 'Data']
-        for index, log in enumerate(self.logs_manager.log_history, start=1):
-            if index == 10:
-                break
+        for index, log in enumerate(self.logs_manager.log_history[-limit:], start=1):
             book_title = self.get_book_by_id(log.book_id).title if self.get_book_by_id(log.book_id) else "[Usunięta książka]"
             logs_table.add_row([
                 index,
@@ -342,47 +244,11 @@ class Library:
                 log.action_time
             ])
         print(logs_table)
+
     def logs_history_display_handler(self):
+        clear_screen()
         print("Ostatnie 10 aktywności.")
         self.display_logs()
-        print('1. Wyszukaj w historii zmian. ')
+        print('1. Wyszukaj w historii zmian.')
         print('0. Wyjście z programu')
 
-class LibraryApp:
-    def __init__(self):
-        self.library = Library()
-
-    def run(self):
-        while True:
-            clear_screen()
-            print("1. Pokaż książki\n2. Dodaj książkę\n3. Filtruj książki\n4. Statystyki\n5. Wypożycz książkę\n6. Zwróć książkę\n7. Edytuj książkę\n8. Usuń książkę\n0. Wyjście")
-            choice = input("Wybierz opcję: ")
-
-            if choice == "1":
-                self.library.print_all_books()
-            elif choice == "2":
-                self.library.add_book_to_library()
-            elif choice == "3":
-                self.library.filter_books()
-            elif choice == '4':
-                self.library.show_stats()
-            elif choice == '5':
-                self.library.book_action_handler('borrow')
-            elif choice == '6':
-                self.library.book_action_handler('return')
-            elif choice == '7':
-                self.library.edit_book_data()
-            elif choice == '8':
-                self.library.delete_book_from_library()
-            elif choice == '9':
-                self.library.logs_history_display_handler()
-            elif choice == "0":
-                print("Do zobaczenia!")
-                break
-            else:
-                print("❌ Niepoprawny wybór.")
-
-            input("\nNaciśnij Enter, aby kontynuować...")
-
-app = LibraryApp()
-app.run()
