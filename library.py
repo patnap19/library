@@ -232,7 +232,7 @@ class Library:
                 return book
         return None
 
-    def display_logs(self, id_to_display = None, limit = 10):
+    def display_logs(self, limit = 10):
         logs_table = prettytable.PrettyTable()
         logs_table.field_names = ['Nr', 'Rodzaj akcji', 'Książka', 'Data']
         for index, log in enumerate(self.logs_manager.log_history[-limit:], start=1):
