@@ -1,0 +1,20 @@
+[
+    {
+        "id": "57f0e425-3cb2-4e52-8ea4-f7d2ea375e5b",
+        "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
+        "action_type": "Dodano",
+        "action_time": "2025-07-18 13:21:18"
+    },
+    {
+        "id": "77753a8f-7de7-40a6-a0b7-375b8bed42e1",
+        "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
+        "action_type": "Edytowano",
+        "action_time": "2025-07-18 13:27:39"
+    },
+    {
+        "id": "0f7e4034-696a-47dc-8eb4-bc9f8d501ca9",
+        "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
+        "action_type": "Usunięto",
+        "action_time": "2025-07-18 13:30:38"
+    }
+]

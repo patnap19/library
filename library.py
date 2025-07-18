@@ -32,14 +32,44 @@ def get_valid_number(prompt):
             print("❌ To pole powinno być liczbą. Spróbuj ponownie.")
         else:
             return int(user_input)
-        
-class Log():
+
+class Log:
     def __init__(self, log_id, book_id, action_type, action_time):
         self.id = log_id or str(uuid.uuid4())
         self.book_id = book_id
         self.action_type = action_type
         self.action_time = action_time or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+class LogsManager:
+    def __init__(self, file_path = "logs.json"):
+        self.file_path = file_path
+        self.log_history = self.load_logs()
+
+    def load_logs(self):
+        if not os.path.exists(self.file_path):
+            return []
+        with open(self.file_path, 'r', encoding='utf-8') as file:
+            try:
+                data = json.load(file)
+                return [Log(
+                    log_id=log['id'],
+                    book_id = log['book_id'],
+                    action_type= log['action_type'],
+                    action_time= log['action_time']
+                ) for log in data]
+            except json.JSONDecodeError:
+                print("❌ Błąd przy wczytywaniu pliku logów.")
+                return []
+
+    def save_logs(self):
+        with open(self.file_path, 'w', encoding='utf-8') as file:
+            json.dump([log.__dict__ for log in self.log_history], file, ensure_ascii=False, indent=4)
+
+    def add_new_log(self, book_id, action_type):
+            new_log = Log(log_id=None, book_id=book_id, action_type=action_type, action_time=None)
+            print(new_log)
+            self.log_history.append(new_log)
+            self.save_logs()
 
 
 class Book:
@@ -77,6 +107,7 @@ class Library:
     def __init__(self, file_path='books.json'):
         self.file_path = file_path
         self.books = self.load_books()
+        self.logs_manager = LogsManager()
 
     def load_books(self):
         if not os.path.exists(self.file_path):
@@ -167,6 +198,7 @@ class Library:
         self.books.append(new_book)
         self.save_books()
         print(f"Książka {title_of_new_book} została dodana do biblioteki")
+        self.logs_manager.add_new_log(new_book.id, "Dodano")
 
     def show_stats(self):
         clear_screen()
@@ -233,9 +265,11 @@ class Library:
                         if action_type == 'borrow':
                             book.borrow_book()
                             print(f'Książka została wypożyczona.')
+                            self.logs_manager.add_new_log(selected_book.id, "Wypożyczono")
                         else:
                             book.return_book()
                             print(f'Książka została zwrócona.')
+                            self.logs_manager.add_new_log(selected_book.id, "Zwrócono")
                 
                 self.save_books()
     
@@ -269,7 +303,8 @@ class Library:
                     break
                 else:
                     print("Podano niewłaściwą wartość")
-    
+            self.logs_manager.add_new_log(seletced_book.id, "Edytowano")
+
     def delete_book_from_library(self):
         self.display_books(self.books)
         seletced_book = self.select_book(self.books)
@@ -280,17 +315,21 @@ class Library:
                     self.books.remove(seletced_book)
                     self.save_books()
                     print("Książka została usunięta z biblioteki.")
+                    self.logs_manager.add_new_log(seletced_book.id, "Usunięto")
                     break
                 elif user_choice == 'nie':
                     print(f'Książka "{seletced_book.title}" pozostanie w bibliotece.')
                     break
                 else:
                     print('Proszę podać słowo "tak" lub "nie".')
+                    
+    def display_logs_history(self):
+        pass
 
 class LibraryApp:
     def __init__(self):
         self.library = Library()
-        
+
     def run(self):
         while True:
             clear_screen()
@@ -313,6 +352,8 @@ class LibraryApp:
                 self.library.edit_book_data()
             elif choice == '8':
                 self.library.delete_book_from_library()
+            elif choice == '9':
+                self.library.display_logs_history()
             elif choice == "0":
                 print("Do zobaczenia!")
                 break

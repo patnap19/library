@@ -126,5 +126,21 @@
         "year": 2006,
         "genre": "Fantasy",
         "borrowed": false
+    },
+    {
+        "id": "7c226da7-ff4f-4bab-969a-6af54a671ea4",
+        "title": "Harry Potter i Insygnia Śmierci",
+        "author": "J.K. Rowling",
+        "year": 2010,
+        "genre": "Fantasy",
+        "borrowed": false
+    },
+    {
+        "id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
+        "title": "Romeo i Julia",
+        "author": "Szekspir",
+        "year": 1800,
+        "genre": "Dramat",
+        "borrowed": false
     }
 ]
