@@ -67,7 +67,6 @@ class LogsManager:
 
     def add_new_log(self, book_id, action_type):
             new_log = Log(log_id=None, book_id=book_id, action_type=action_type, action_time=None)
-            print(new_log)
             self.log_history.append(new_log)
             self.save_logs()
 
@@ -323,8 +322,31 @@ class Library:
                 else:
                     print('Proszę podać słowo "tak" lub "nie".')
                     
-    def display_logs_history(self):
-        pass
+    def get_book_by_id(self, book_id):
+        for book in self.books:
+            if book.id == book_id:
+                return book
+        return None
+                    
+    def display_logs(self, filter = None):
+        logs_table = prettytable.PrettyTable()
+        logs_table.field_names = ['Nr', 'Rodzaj akcji', 'Książka', 'Data']
+        for index, log in enumerate(self.logs_manager.log_history, start=1):
+            if index == 10:
+                break
+            book_title = self.get_book_by_id(log.book_id).title if self.get_book_by_id(log.book_id) else "[Usunięta książka]"
+            logs_table.add_row([
+                index,
+                log.action_type,
+                book_title,
+                log.action_time
+            ])
+        print(logs_table)
+    def logs_history_display_handler(self):
+        print("Ostatnie 10 aktywności.")
+        self.display_logs()
+        print('1. Wyszukaj w historii zmian. ')
+        print('0. Wyjście z programu')
 
 class LibraryApp:
     def __init__(self):
@@ -353,7 +375,7 @@ class LibraryApp:
             elif choice == '8':
                 self.library.delete_book_from_library()
             elif choice == '9':
-                self.library.display_logs_history()
+                self.library.logs_history_display_handler()
             elif choice == "0":
                 print("Do zobaczenia!")
                 break

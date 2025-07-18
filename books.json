@@ -13,7 +13,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1992,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "d93ba2cd-c2e5-4f65-9855-49e01f0ff9c8",
@@ -109,7 +109,7 @@
         "author": "J.K. Rowling",
         "year": 2003,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "2021f58e-b446-4bb6-a413-7e50decefe28",
@@ -117,7 +117,7 @@
         "author": "J.K. Rowling",
         "year": 2004,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "609cd6d1-56fb-4989-b275-d9fdc82143a4",
@@ -141,6 +141,6 @@
         "author": "Szekspir",
         "year": 1800,
         "genre": "Dramat",
-        "borrowed": false
+        "borrowed": true
     }
 ]
