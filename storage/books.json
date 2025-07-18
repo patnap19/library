@@ -134,5 +134,13 @@
         "year": 2010,
         "genre": "Fantasy",
         "borrowed": false
+    },
+    {
+        "id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",
+        "title": "Potop",
+        "author": "Henryk Sienkiewicz",
+        "year": 2011,
+        "genre": "Powieść",
+        "borrowed": true
     }
 ]

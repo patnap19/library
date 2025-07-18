@@ -232,18 +232,57 @@ class Library:
                 return book
         return None
 
-    def display_logs(self, filter = None, limit = 10):
+    def display_logs(self, id_to_display = None, limit = 10):
         logs_table = prettytable.PrettyTable()
         logs_table.field_names = ['Nr', 'Rodzaj akcji', 'Książka', 'Data']
         for index, log in enumerate(self.logs_manager.log_history[-limit:], start=1):
-            book_title = self.get_book_by_id(log.book_id).title if self.get_book_by_id(log.book_id) else "[Usunięta książka]"
-            logs_table.add_row([
-                index,
-                log.action_type,
-                book_title,
-                log.action_time
-            ])
+                book_title = self.get_book_by_id(log.book_id).title if self.get_book_by_id(log.book_id) else "[Usunięta książka]"
+                logs_table.add_row([
+                    index,
+                    log.action_type,
+                    book_title,
+                    log.action_time
+                ])
         print(logs_table)
+        
+    def logs_filter(self):
+        print("Wyszukaj logów według: ")
+        print("1. Książki\n2. Daty\n0. Wyjście")
+        user_choice = input("Twój wybór: ")
+        if user_choice == '1':
+            filtered_books = self.filter_by_field(self.books, 'title')
+            if len(filtered_books) == 1:
+                self.display_books(filtered_books)
+                book_to_check = filtered_books[0]
+            elif len(filtered_books) > 1:
+                self.display_books(filtered_books)
+                book_to_check = self.select_book(filtered_books)
+            else:
+                print("W biblitece nie ma podanej książki")
+
+            logs_of_book = []
+            
+            for log in self.logs_manager.log_history:
+                if log.book_id == book_to_check.id:
+                    logs_of_book.append(log)
+            if logs_of_book:
+                logs_table = prettytable.PrettyTable()
+                logs_table.field_names = ['Nr', 'Rodzaj akcji', 'Książka', 'Data']
+                for index, log in enumerate(logs_of_book, start=1):
+                    logs_table.add_row([
+                        index,
+                        log.action_type,
+                        book_to_check.title,
+                        log.action_time
+                    ])
+                print(logs_table)
+            
+        elif user_choice == '2':
+            print("Szukamy po datach")
+        elif user_choice == '0':
+            return
+        else:
+            print("Podano błedą wartość. Spróbuj ponownie")
 
     def logs_history_display_handler(self):
         clear_screen()
@@ -251,4 +290,14 @@ class Library:
         self.display_logs()
         print('1. Wyszukaj w historii zmian.')
         print('0. Wyjście z programu')
+        while True:
+            user_choice = input('Wybierz jedną z możliwości: ')
+            if user_choice == '1':
+                self.logs_filter()
+                break
+            elif user_choice == '0':
+                print("Cofnięcie do menu")
+                return
+            else:
+                print("Podaj jedną z dostępnych możliwości.")
 

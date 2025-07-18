@@ -30,6 +30,7 @@ class LibraryApp:
             elif choice == '9':
                 self.library.logs_history_display_handler()
             elif choice == "0":
+                clear_screen()
                 print("Do zobaczenia!")
                 break
             else:

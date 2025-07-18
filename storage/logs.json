@@ -1,98 +1,116 @@
 [
-  {
-    "id": "57f0e425-3cb2-4e52-8ea4-f7d2ea375e5b",
-    "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
-    "action_type": "Dodano",
-    "action_time": "2025-07-18 13:21:18"
-  },
-  {
-    "id": "77753a8f-7de7-40a6-a0b7-375b8bed42e1",
-    "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
-    "action_type": "Edytowano",
-    "action_time": "2025-07-18 13:27:39"
-  },
-  {
-    "id": "0f7e4034-696a-47dc-8eb4-bc9f8d501ca9",
-    "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
-    "action_type": "Usunięto",
-    "action_time": "2025-07-18 13:30:38"
-  },
-  {
-    "id": "ac991c0f-3902-4a9a-9187-e5f8d179b4c3",
-    "book_id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
-    "action_type": "Wypożyczono",
-    "action_time": "2025-07-18 13:55:08"
-  },
-  {
-    "id": "0b0a8471-6fda-4920-a867-af5c397f993d",
-    "book_id": "2021f58e-b446-4bb6-a413-7e50decefe28",
-    "action_type": "Wypożyczono",
-    "action_time": "2025-07-18 13:55:18"
-  },
-  {
-    "id": "8acb2c28-d235-44f1-9274-471d33a01fe1",
-    "book_id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
-    "action_type": "Zwrócono",
-    "action_time": "2025-07-18 13:55:26"
-  },
-  {
-    "id": "778015e5-d470-4204-9ad6-ebb4374f7c46",
-    "book_id": "d5014efa-3d9f-49ad-865e-56a39c98a90a",
-    "action_type": "Zwrócono",
-    "action_time": "2025-07-18 13:55:36"
-  },
-  {
-    "id": "f98caff2-1ad0-4f27-9493-982eaf0f2a36",
-    "book_id": "3aaef14a-16d6-49c1-add5-e65dc30b92ed",
-    "action_type": "Wypożyczono",
-    "action_time": "2025-07-18 14:02:54"
-  },
-  {
-    "id": "d4850264-ea0c-42af-965e-57c9f1b99290",
-    "book_id": "87213e0f-85ee-41b1-bb73-71036e79c4ad",
-    "action_type": "Zwrócono",
-    "action_time": "2025-07-18 14:03:03"
-  },
-  {
-    "id": "26462509-a178-4085-b6ab-0cbac0044ee9",
-    "book_id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
-    "action_type": "Edytowano",
-    "action_time": "2025-07-18 14:04:57"
-  },
-  {
-    "id": "6f82d86b-5083-41e0-ae79-70d12c3f1c18",
-    "book_id": "2bf2df8d-91fb-4a5b-894e-95c66522d55e",
-    "action_type": "Zwrócono",
-    "action_time": "2025-07-18 14:05:14"
-  },
-  {
-    "id": "3d8b94af-4be9-4b8f-84e9-353ce549a6e5",
-    "book_id": "5cc85e28-c295-4c77-909f-044a80a8e441",
-    "action_type": "Dodano",
-    "action_time": "2025-07-18 14:08:47"
-  },
-  {
-    "id": "3de5218a-1e4e-405f-835b-a01ffac88c23",
-    "book_id": "d0766312-5308-4036-acb1-a7392bcbe4d0",
-    "action_type": "Wypożyczono",
-    "action_time": "2025-07-18 14:09:37"
-  },
-  {
-    "id": "65a5f51c-d6c4-40e0-b630-60998553d0f4",
-    "book_id": "d93ba2cd-c2e5-4f65-9855-49e01f0ff9c8",
-    "action_type": "Zwrócono",
-    "action_time": "2025-07-18 14:09:45"
-  },
-  {
-    "id": "35ae8791-6fab-456b-ae38-5e21984f91fb",
-    "book_id": "5cc85e28-c295-4c77-909f-044a80a8e441",
-    "action_type": "Edytowano",
-    "action_time": "2025-07-18 14:09:53"
-  },
-  {
-    "id": "87e0c29f-c61c-4d79-984b-50115d308e5d",
-    "book_id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
-    "action_type": "Usunięto",
-    "action_time": "2025-07-18 15:20:40"
-  }
+    {
+        "id": "57f0e425-3cb2-4e52-8ea4-f7d2ea375e5b",
+        "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
+        "action_type": "Dodano",
+        "action_time": "2025-07-18 13:21:18"
+    },
+    {
+        "id": "77753a8f-7de7-40a6-a0b7-375b8bed42e1",
+        "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
+        "action_type": "Edytowano",
+        "action_time": "2025-07-18 13:27:39"
+    },
+    {
+        "id": "0f7e4034-696a-47dc-8eb4-bc9f8d501ca9",
+        "book_id": "df0a52ab-15eb-4b05-8439-f70092e93783",
+        "action_type": "Usunięto",
+        "action_time": "2025-07-18 13:30:38"
+    },
+    {
+        "id": "ac991c0f-3902-4a9a-9187-e5f8d179b4c3",
+        "book_id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-18 13:55:08"
+    },
+    {
+        "id": "0b0a8471-6fda-4920-a867-af5c397f993d",
+        "book_id": "2021f58e-b446-4bb6-a413-7e50decefe28",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-18 13:55:18"
+    },
+    {
+        "id": "8acb2c28-d235-44f1-9274-471d33a01fe1",
+        "book_id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
+        "action_type": "Zwrócono",
+        "action_time": "2025-07-18 13:55:26"
+    },
+    {
+        "id": "778015e5-d470-4204-9ad6-ebb4374f7c46",
+        "book_id": "d5014efa-3d9f-49ad-865e-56a39c98a90a",
+        "action_type": "Zwrócono",
+        "action_time": "2025-07-18 13:55:36"
+    },
+    {
+        "id": "f98caff2-1ad0-4f27-9493-982eaf0f2a36",
+        "book_id": "3aaef14a-16d6-49c1-add5-e65dc30b92ed",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-18 14:02:54"
+    },
+    {
+        "id": "d4850264-ea0c-42af-965e-57c9f1b99290",
+        "book_id": "87213e0f-85ee-41b1-bb73-71036e79c4ad",
+        "action_type": "Zwrócono",
+        "action_time": "2025-07-18 14:03:03"
+    },
+    {
+        "id": "26462509-a178-4085-b6ab-0cbac0044ee9",
+        "book_id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
+        "action_type": "Edytowano",
+        "action_time": "2025-07-18 14:04:57"
+    },
+    {
+        "id": "6f82d86b-5083-41e0-ae79-70d12c3f1c18",
+        "book_id": "2bf2df8d-91fb-4a5b-894e-95c66522d55e",
+        "action_type": "Zwrócono",
+        "action_time": "2025-07-18 14:05:14"
+    },
+    {
+        "id": "3d8b94af-4be9-4b8f-84e9-353ce549a6e5",
+        "book_id": "5cc85e28-c295-4c77-909f-044a80a8e441",
+        "action_type": "Dodano",
+        "action_time": "2025-07-18 14:08:47"
+    },
+    {
+        "id": "3de5218a-1e4e-405f-835b-a01ffac88c23",
+        "book_id": "d0766312-5308-4036-acb1-a7392bcbe4d0",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-18 14:09:37"
+    },
+    {
+        "id": "65a5f51c-d6c4-40e0-b630-60998553d0f4",
+        "book_id": "d93ba2cd-c2e5-4f65-9855-49e01f0ff9c8",
+        "action_type": "Zwrócono",
+        "action_time": "2025-07-18 14:09:45"
+    },
+    {
+        "id": "35ae8791-6fab-456b-ae38-5e21984f91fb",
+        "book_id": "5cc85e28-c295-4c77-909f-044a80a8e441",
+        "action_type": "Edytowano",
+        "action_time": "2025-07-18 14:09:53"
+    },
+    {
+        "id": "87e0c29f-c61c-4d79-984b-50115d308e5d",
+        "book_id": "013f4063-ff16-4254-aa3d-49bc5f8bd269",
+        "action_type": "Usunięto",
+        "action_time": "2025-07-18 15:20:40"
+    },
+    {
+        "id": "c73542eb-0d69-42c4-9142-1fc0aafe05eb",
+        "book_id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",
+        "action_type": "Dodano",
+        "action_time": "2025-07-18 15:53:01"
+    },
+    {
+        "id": "2e4b493c-2bf8-469e-90fe-54805a9b88ad",
+        "book_id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",
+        "action_type": "Edytowano",
+        "action_time": "2025-07-18 16:46:46"
+    },
+    {
+        "id": "aaacfe4a-fc2a-4b6c-ac75-8e58e1c91118",
+        "book_id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-18 16:46:54"
+    }
 ]
