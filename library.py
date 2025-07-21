@@ -4,6 +4,7 @@ import prettytable
 from collections import Counter
 from book import Book
 from logs import LogsManager
+import re
 
 
 class Library:
@@ -276,9 +277,40 @@ class Library:
                         log.action_time
                     ])
                 print(logs_table)
+            else:
+                print("Nie ma żadnych logów dla podanej książki.")
             
         elif user_choice == '2':
-            print("Szukamy po datach")
+            r = re.compile('.{4}-.{2}-.{2}')
+            logs_by_date = []
+            while True:
+                date_to_check = input("Wprowadź datę, którą chcesz sprawdzić(RRRR-MM-DD)(wprowadź 0 aby wyjść z opcji): ")
+                if r.match(date_to_check):
+                    break
+                elif date_to_check == '0':
+                    return
+                else:
+                    print('Podano błędną zapis daty, spróbuj ponownie.(format: RRRR-MM-DD)')
+            for log in self.logs_manager.log_history:
+                if date_to_check in log.action_time:
+                    logs_by_date.append(log)
+            if logs_by_date:
+                logs_table = prettytable.PrettyTable()
+                logs_table.field_names = ['Nr', 'Rodzaj akcji', 'Książka', 'Data']
+                for index, log in enumerate(logs_by_date, start=1):
+                    if self.get_book_by_id(log.book_id) == None:
+                        book_title = 'Książka już nie istnieje'
+                    else:
+                        book_title = self.get_book_by_id(log.book_id).title
+                    logs_table.add_row([
+                        index,
+                        log.action_type,
+                        book_title,
+                        log.action_time
+                    ])
+                print(logs_table)
+            else:
+                print(f"Nie znaleziono żadnych wyników dla daty: {date_to_check}")
         elif user_choice == '0':
             return
         else:

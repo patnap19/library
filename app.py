@@ -40,3 +40,8 @@ class LibraryApp:
 
 app = LibraryApp()
 app.run()
+
+#TODO
+# 1. Wyszukiwanie logów po akcji
+# 2. Może zapisywać logi książki konretnej do innych plików. - opcjonalne na przyszłość
+# 3. Wykonać użytkowników?
