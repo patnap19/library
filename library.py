@@ -226,7 +226,7 @@ class Library:
                     break
                 else:
                     print('Proszę podać słowo "tak" lub "nie".')
-                    
+
     def get_book_by_id(self, book_id):
         for book in self.books:
             if book.id == book_id:
