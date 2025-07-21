@@ -112,5 +112,11 @@
         "book_id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",
         "action_type": "Wypożyczono",
         "action_time": "2025-07-18 16:46:54"
+    },
+    {
+        "id": "0fa9fba4-98e6-4693-9cb6-1985ba05383f",
+        "book_id": "3aaef14a-16d6-49c1-add5-e65dc30b92ed",
+        "action_type": "Zwrócono",
+        "action_time": "2025-07-21 19:31:08"
     }
 ]

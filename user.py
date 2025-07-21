@@ -5,7 +5,7 @@ import json
 from utils import *
 
 class User:
-    def __init__(self, user_id, login, password, user_name, user_surname, borrowed_books, is_admin = False):
+    def __init__(self, user_id, login, password, user_name, user_surname, borrowed_books):
         self.id = user_id or str(uuid.uuid4())
         self.login = login
         self.password = password
@@ -13,7 +13,6 @@ class User:
         self.surname = user_surname
         
         self.borrowed_books = borrowed_books or []
-        self.is_admin = is_admin
         
     def borrow_book():
         pass

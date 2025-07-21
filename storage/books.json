@@ -61,7 +61,7 @@
         "author": "George Orwell",
         "year": 1945,
         "genre": "Satyra polityczna",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "7b850972-d0a7-4225-800c-5d4958c21af0",
