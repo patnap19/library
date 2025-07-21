@@ -1,101 +1,102 @@
-# 📚 Szkolna Biblioteka – Konsolowa aplikacja w Pythonie
+# 📚 Library Management CLI App (Python)
 
-Konsolowa aplikacja do zarządzania biblioteką szkolną. Pozwala na przeglądanie, filtrowanie, edytowanie oraz wypożyczanie książek, które są przechowywane w pliku JSON.
+Aplikacja konsolowa do zarządzania biblioteką, pozwalająca na:
 
----
+- dodawanie i edytowanie książek,
+- wypożyczanie i zwracanie,
+- filtrowanie i przeszukiwanie katalogu,
+- rejestrowanie logów aktywności,
+- analizę statystyk bibliotecznych.
 
-## ✅ Funkcje
+## 🧠 Struktura projektu
 
-- 📖 Wyświetlanie wszystkich książek w bibliotece w formie tabeli
-- 🔍 Filtrowanie książek po wielu kryteriach:
-  - tytuł
-  - autor
-  - rok wydania
-  - gatunek
-  - status wypożyczenia
-- ➕ Dodawanie nowej książki (z walidacją danych)
-- ✍ Edycja danych książki (tytuł, autor, rok, gatunek)
-- 🔀 Wypożyczanie i zwracanie książek
-- 📊 Statystyki biblioteki (liczba książek, dostępnych, najczęściej występujący autor)
-- 📂 Dane zapisywane i wczytywane z pliku `books.json`
+```
+library/
+├── app.py               # Główna pętla programu (interfejs CLI)
+├── library.py           # Klasa Library – zarządza książkami i logami
+├── book.py              # Klasa Book – reprezentuje książkę
+├── logs.py              # Klasa LogsManager – rejestruje historię działań
+├── utils.py             # Funkcje pomocnicze (walidacja, czyszczenie ekranu)
+└── storage/
+    ├── books.json       # Dane książek
+    └── logs.json        # Historia logów aktywności
+```
 
----
+## 🛠️ Wymagania
 
-## 🛠 Wymagania
+- Python 3.8 lub nowszy
+- Pakiety: `prettytable`
 
-- Python 3.8+
-- Biblioteka `prettytable` do wyświetlania książek w formie tabeli:
+Można zainstalować wymagany pakiet komendą:
 
 ```bash
 pip install prettytable
 ```
 
----
+## 🚀 Jak uruchomić?
 
-## 📂 Przykład zawartości `books.json`
-
-Aplikacja sama tworzy plik `books.json`, jeśli go nie ma. Przykładowa struktura:
-
-```json
-[
-  {
-    "id": "1234-uuid",
-    "title": "Wiedźmin",
-    "author": "Andrzej Sapkowski",
-    "year": 1993,
-    "genre": "Fantasy",
-    "borrowed": false
-  }
-]
-```
-
----
-
-## 🚀 Uruchomienie aplikacji
-
-1. Upewnij się, że plik `books.json` (jeśli istnieje) znajduje się w tym samym folderze co plik `.py`
-2. Uruchom aplikację:
+1. Upewnij się, że masz strukturę katalogów zgodną z powyższą.
+2. W terminalu (z katalogu projektu) uruchom:
 
 ```bash
-python biblioteka.py
+python app.py
 ```
 
----
+## 🧩 Funkcje
 
-## 🧪 Przykładowe opcje w menu
+### 📖 Zarządzanie książkami:
 
+- Dodawanie, edytowanie i usuwanie książek
+- Przechowywanie danych w pliku `storage/books.json`
+
+### 🔍 Filtrowanie:
+
+- Po tytule, autorze, roku, gatunku lub stanie wypożyczenia
+
+### 📕 Wypożyczanie i zwroty:
+
+- Status `borrowed` zmieniany automatycznie
+- Rejestrowanie akcji w logach
+
+### 📊 Statystyki:
+
+- Całkowita liczba książek
+- Ilość wypożyczonych i dostępnych
+- Autorzy z największą liczbą książek
+
+### 📜 Historia logów:
+
+- Logi akcji: dodanie, edycja, wypożyczenie, zwrot, usunięcie
+- Możliwość przeszukiwania logów wg książki lub daty
+
+## 📝 Dane logów
+
+Log zawiera:
+
+- unikalny identyfikator
+- `book_id` powiązany z książką
+- typ akcji (`Dodano`, `Zwrócono`, `Usunięto` itd.)
+- datę i czas zdarzenia
+
+Zapisane są w `storage/logs.json`.
+
+## 📂 Przykład rekordu książki
+
+```json
+{
+  "id": "e8a9b1f4-1234-4bde-a321-c0ac132d5001",
+  "title": "Wiedźmin",
+  "author": "Andrzej Sapkowski",
+  "year": 1990,
+  "genre": "Fantasy",
+  "borrowed": false
+}
 ```
-1. Pokaż książki
-2. Dodaj książkę
-3. Filtruj książki
-4. Statystyki
-5. Wypożycz książkę
-6. Zwróć książkę
-7. Edytuj książkę
-0. Wyjście
-```
 
----
+## ✍️ Autor
 
-## 🧹 Planowane funkcje
+Projekt utworzony i rozwijany przez patnap19.
 
-- 📅 Import i eksport danych (CSV lub JSON)
-- 👥 Obsługa wielu użytkowników
-- 🕒 Historia wypożyczeń
-- 🔍 Sortowanie wyników filtrowania
-- 🗑 Usuwanie książek
-- 📌 Ulubione książki / oznaczenia
+## 📃 Licencja
 
----
-
-## 🧠 Struktura projektu (OOP)
-
-- `Book` – reprezentuje pojedynczą książkę
-- `Library` – zarządza książkami, plikiem JSON oraz operacjami (dodawanie, filtrowanie, wypożyczanie itp.)
-- `LibraryApp` – główna aplikacja sterująca menu i przepływem programu
-
----
-
-## 📌 Licencja
-
-Projekt stworzony do celów edukacyjnych. Można dowolnie modyfikować i rozwijać 🚀
+MIT – możesz używać, kopiować i modyfikować wedle uznania.
