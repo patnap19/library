@@ -1,102 +1,84 @@
-# 📚 Library Management CLI App (Python)
+# 📚 Aplikacja Biblioteka Szkolna
 
-Aplikacja konsolowa do zarządzania biblioteką, pozwalająca na:
+Projekt umożliwia zarządzanie biblioteką szkolną w terminalu: logowanie, wypożyczanie książek, zarządzanie użytkownikami oraz historię operacji.
 
-- dodawanie i edytowanie książek,
-- wypożyczanie i zwracanie,
-- filtrowanie i przeszukiwanie katalogu,
-- rejestrowanie logów aktywności,
-- analizę statystyk bibliotecznych.
+---
 
-## 🧠 Struktura projektu
+## 📦 Struktura projektu
 
 ```
 library/
-├── app.py               # Główna pętla programu (interfejs CLI)
-├── library.py           # Klasa Library – zarządza książkami i logami
-├── book.py              # Klasa Book – reprezentuje książkę
-├── logs.py              # Klasa LogsManager – rejestruje historię działań
-├── utils.py             # Funkcje pomocnicze (walidacja, czyszczenie ekranu)
+├── app.py               # Główna aplikacja
+├── book.py              # Klasa Book
+├── library.py           # Główna logika biblioteki
+├── logs.py              # System logowania działań
+├── user.py              # Użytkownicy i ich zarządzanie
+├── utils.py             # Funkcje pomocnicze
 └── storage/
     ├── books.json       # Dane książek
-    └── logs.json        # Historia logów aktywności
+    ├── users.json       # Dane użytkowników
+    └── logs.json        # Logi
 ```
 
-## 🛠️ Wymagania
+---
 
-- Python 3.8 lub nowszy
-- Pakiety: `prettytable`
+## 🔐 Logowanie
 
-Można zainstalować wymagany pakiet komendą:
+- 3 próby logowania.
+- Hasła mogą być hashowane za pomocą `hashlib` (do wdrożenia).
+- Rola admina (`is_admin`) umożliwia dostęp do rozszerzonych opcji.
 
-```bash
-pip install prettytable
-```
+---
 
-## 🚀 Jak uruchomić?
+## 👤 Role użytkowników
 
-1. Upewnij się, że masz strukturę katalogów zgodną z powyższą.
-2. W terminalu (z katalogu projektu) uruchom:
+| Rola          | Możliwości                                    |
+| ------------- | --------------------------------------------- |
+| Użytkownik    | Przeglądanie książek, wypożyczanie, zwracanie |
+| Administrator | Zarządzanie książkami, użytkownikami, logami  |
 
-```bash
-python app.py
-```
+---
 
-## 🧩 Funkcje
+## 📘 Funkcje
 
-### 📖 Zarządzanie książkami:
+- Dodawanie/edycja/usuwanie książek
+- Filtrowanie wg autora, roku, gatunku, dostępności
+- Obsługa logów (kto co zrobił i kiedy)
+- Statystyki biblioteki (np. najczęstszy autor)
+- Możliwość dodania użytkowników przez admina
 
-- Dodawanie, edytowanie i usuwanie książek
-- Przechowywanie danych w pliku `storage/books.json`
+---
 
-### 🔍 Filtrowanie:
+## ✅ Przykładowy przebieg
 
-- Po tytule, autorze, roku, gatunku lub stanie wypożyczenia
+1. Uruchom `app.py`
+2. Zaloguj się jako istniejący użytkownik (admin lub zwykły)
+3. Wybierz odpowiednie menu
+4. Wykonuj operacje (np. wypożycz, edytuj, dodaj książkę)
 
-### 📕 Wypożyczanie i zwroty:
+---
 
-- Status `borrowed` zmieniany automatycznie
-- Rejestrowanie akcji w logach
+## ⚠️ TODO
 
-### 📊 Statystyki:
+- [ ] Hashowanie haseł
+- [ ] Możliwość zmiany hasła
+- [ ] Logi filtrowane po akcji
+- [ ] Testy jednostkowe (`pytest`)
+- [ ] Refaktoryzacja `logs_filter()` do `logs.py`
 
-- Całkowita liczba książek
-- Ilość wypożyczonych i dostępnych
-- Autorzy z największą liczbą książek
+---
 
-### 📜 Historia logów:
+## 🧪 Testowanie
 
-- Logi akcji: dodanie, edycja, wypożyczenie, zwrot, usunięcie
-- Możliwość przeszukiwania logów wg książki lub daty
+Zalecane testy jednostkowe dla klas:
 
-## 📝 Dane logów
+- `User`
+- `Book`
+- `LogsManager`
+- `Library`
 
-Log zawiera:
+---
 
-- unikalny identyfikator
-- `book_id` powiązany z książką
-- typ akcji (`Dodano`, `Zwrócono`, `Usunięto` itd.)
-- datę i czas zdarzenia
+## 📄 Licencja
 
-Zapisane są w `storage/logs.json`.
-
-## 📂 Przykład rekordu książki
-
-```json
-{
-  "id": "e8a9b1f4-1234-4bde-a321-c0ac132d5001",
-  "title": "Wiedźmin",
-  "author": "Andrzej Sapkowski",
-  "year": 1990,
-  "genre": "Fantasy",
-  "borrowed": false
-}
-```
-
-## ✍️ Autor
-
-Projekt utworzony i rozwijany przez patnap19.
-
-## 📃 Licencja
-
-MIT – możesz używać, kopiować i modyfikować wedle uznania.
+Projekt edukacyjny – możesz modyfikować i używać dowolnie w celach niekomercyjnych.
