@@ -5,6 +5,7 @@ from collections import Counter
 from book import Book
 from logs import LogsManager
 import re
+from user import *
 
 
 class Library:
@@ -150,7 +151,7 @@ class Library:
             except ValueError:
                 print('Nie podano numeru, pod którym znajduje się książka. Spróbuj ponownie')
 
-    def book_action_handler(self, action_type):
+    def book_action_handler(self, action_type, user):
         clear_screen()
         if action_type == 'borrow':
             books = [book for book in self.books if not book.borrowed]

@@ -4,8 +4,8 @@ def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 FILTERS_FOR_BOOKS = {'title': 'tytuł',
-    'author': 'autor', 
-    'year': 'rok', 
+    'author': 'autor',
+    'year': 'rok',
     'genre': 'gatunek',
     'borrowed': 'wypożyczona'
 }
