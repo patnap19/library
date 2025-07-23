@@ -15,15 +15,18 @@ class User:
         self.is_admin = is_admin
         
     def borrow_book(self, book_id):
-        print('TU WCHODZIMY')
         if book_id not in self.borrowed_books:
             self.borrowed_books.append(book_id)
             print(f"Książka została wypożyczona.")
         else:
             print("Książka jest już przez Ciebie wypożyczona.")
     
-    def return_book():
-        pass
+    def return_book(self, book_id):
+        if book_id in self.borrowed_books:
+            self.borrowed_books.remove(book_id)
+            print(f"Książka została zwrócona.")
+        else:
+            print("Nie wypożyczyłeś tej książki.")
     
     def change_data():
         pass

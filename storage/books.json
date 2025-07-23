@@ -133,7 +133,7 @@
         "author": "J.K. Rowling",
         "year": 2010,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",

@@ -1,20 +1,20 @@
 [
-  {
-    "id": "1715b00b-9c2c-4a78-ac8b-ead8c35b4b13",
-    "login": "patnap19",
-    "name": "Adam",
-    "surname": "Nikt",
-    "password": "haslo1",
-    "borrowed_books": [],
-    "is_admin": true
-  },
-  {
-    "id": "d9f4d1e6-476c-45b6-968f-80911755d088",
-    "login": "user1",
-    "name": "Adam",
-    "surname": "Nikogo",
-    "password": "haslo2",
-    "borrowed_books": ["7c226da7-ff4f-4bab-969a-6af54a671ea4"],
-    "is_admin": false
-  }
+    {
+        "id": "1715b00b-9c2c-4a78-ac8b-ead8c35b4b13",
+        "login": "patnap19",
+        "name": "Adam",
+        "surname": "Nikt",
+        "password": "haslo1",
+        "borrowed_books": [],
+        "is_admin": true
+    },
+    {
+        "id": "d9f4d1e6-476c-45b6-968f-80911755d088",
+        "login": "user1",
+        "name": "Adam",
+        "surname": "Nikogo",
+        "password": "haslo2",
+        "borrowed_books": [],
+        "is_admin": false
+    }
 ]

@@ -179,7 +179,11 @@ class Library:
                         else:
                             book.return_book()
                             print(f'Książka została zwrócona.')
-                            self.logs_manager.add_new_log(selected_book.id, "Zwrócono")
+                            for u in self.users_manager.users_list:
+                                if u.id == user.id:
+                                    u.return_book(selected_book.id)
+                                    break
+                            self.logs_manager.add_new_log(selected_book.id, "Zwrócono", user.id)
                 self.save_books()
                 self.users_manager.save_users()
     
