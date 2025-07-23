@@ -4,11 +4,12 @@ from datetime import datetime
 import os
 
 class Log:
-    def __init__(self, log_id, book_id, action_type, action_time):
+    def __init__(self, log_id, book_id, action_type, action_time, user_id):
         self.id = log_id or str(uuid.uuid4())
         self.book_id = book_id
         self.action_type = action_type
         self.action_time = action_time or datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        self.user_id = user_id
 
 class LogsManager:
     def __init__(self, file_path = "storage/logs.json"):
@@ -35,7 +36,7 @@ class LogsManager:
         with open(self.file_path, 'w', encoding='utf-8') as file:
             json.dump([log.__dict__ for log in self.log_history], file, ensure_ascii=False, indent=4)
 
-    def add_new_log(self, book_id, action_type):
-            new_log = Log(log_id=None, book_id=book_id, action_type=action_type, action_time=None)
+    def add_new_log(self, book_id, action_type, user_id):
+            new_log = Log(log_id=None, book_id=book_id, action_type=action_type, action_time=None, user_id=user_id)
             self.log_history.append(new_log)
             self.save_logs()

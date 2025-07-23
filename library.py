@@ -169,13 +169,13 @@ class Library:
                     if book.id == selected_book.id:
                         if action_type == 'borrow':
                             book.borrow_book()
+                            user.borrow_book(selected_book.id)
                             print(f'Książka została wypożyczona.')
-                            self.logs_manager.add_new_log(selected_book.id, "Wypożyczono")
+                            self.logs_manager.add_new_log(selected_book.id, "Wypożyczono", user.id)
                         else:
                             book.return_book()
                             print(f'Książka została zwrócona.')
                             self.logs_manager.add_new_log(selected_book.id, "Zwrócono")
-                
                 self.save_books()
     
     def edit_book_data(self):
