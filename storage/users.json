@@ -1,22 +1,20 @@
 [
-    {
-        "id": "1715b00b-9c2c-4a78-ac8b-ead8c35b4b13",
-        "login": "patnap19",
-        "name": "Patryk",
-        "surname": "Napiórkowski",
-        "password": "volleyball",
-        "borrowed_books": [],
-        "is_admin": true
-    },
-    {
-        "id": "d9f4d1e6-476c-45b6-968f-80911755d088",
-        "login": "annjeziorsk",
-        "name": "Anna",
-        "surname": "Napiórkowska",
-        "password": "patras",
-        "borrowed_books": [
-            "7c226da7-ff4f-4bab-969a-6af54a671ea4"
-        ],
-        "is_admin": false
-    }
+  {
+    "id": "1715b00b-9c2c-4a78-ac8b-ead8c35b4b13",
+    "login": "patnap19",
+    "name": "Patryk",
+    "surname": "Napiórkowski",
+    "password": "aniutka",
+    "borrowed_books": [],
+    "is_admin": true
+  },
+  {
+    "id": "d9f4d1e6-476c-45b6-968f-80911755d088",
+    "login": "annjeziorsk",
+    "name": "Anna",
+    "surname": "Napiórkowska",
+    "password": "patras",
+    "borrowed_books": ["7c226da7-ff4f-4bab-969a-6af54a671ea4"],
+    "is_admin": false
+  }
 ]

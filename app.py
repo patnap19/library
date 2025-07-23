@@ -97,7 +97,9 @@ class LibraryApp:
         else:
             self.user_menu()
 
+
 app = LibraryApp()
+clear_screen()
 app.run()
 
 #TODO
