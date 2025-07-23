@@ -26,7 +26,8 @@ class LogsManager:
                     log_id=log['id'],
                     book_id = log['book_id'],
                     action_type= log['action_type'],
-                    action_time= log['action_time']
+                    action_time= log['action_time'],
+                    user_id= log['user_id']
                 ) for log in data]
             except json.JSONDecodeError:
                 print("❌ Błąd przy wczytywaniu pliku logów.")

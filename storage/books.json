@@ -5,7 +5,7 @@
         "author": "Andrzej Sapkowski",
         "year": 1993,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "c9d6ce02-4853-4e6c-aab4-e7d0da4453dc",
@@ -85,7 +85,7 @@
         "author": "Henryk Sienkiewicz",
         "year": 1840,
         "genre": "Powieść",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "1b552406-d47b-41f7-a80e-fc964add8300",
@@ -117,7 +117,7 @@
         "author": "J.K. Rowling",
         "year": 2004,
         "genre": "Fantasy",
-        "borrowed": true
+        "borrowed": false
     },
     {
         "id": "609cd6d1-56fb-4989-b275-d9fdc82143a4",
@@ -133,7 +133,7 @@
         "author": "J.K. Rowling",
         "year": 2010,
         "genre": "Fantasy",
-        "borrowed": false
+        "borrowed": true
     },
     {
         "id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",

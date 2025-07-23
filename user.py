@@ -15,6 +15,7 @@ class User:
         self.is_admin = is_admin
         
     def borrow_book(self, book_id):
+        print('TU WCHODZIMY')
         if book_id not in self.borrowed_books:
             self.borrowed_books.append(book_id)
             print(f"Książka została wypożyczona.")

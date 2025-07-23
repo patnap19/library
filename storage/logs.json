@@ -5,5 +5,40 @@
         "action_type": "Wypożyczono",
         "action_time": "2025-07-23 11:13:42",
         "user_id": "d9f4d1e6-476c-45b6-968f-80911755d088"
+    },
+    {
+        "id": "58c20656-86b8-4bfc-b3c8-4f3b639ae268",
+        "book_id": "7c226da7-ff4f-4bab-969a-6af54a671ea4",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-23 11:17:28",
+        "user_id": "d9f4d1e6-476c-45b6-968f-80911755d088"
+    },
+    {
+        "id": "3e81bf20-008e-4d02-82fb-b9152e736a69",
+        "book_id": "609cd6d1-56fb-4989-b275-d9fdc82143a4",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-23 11:23:36",
+        "user_id": "d9f4d1e6-476c-45b6-968f-80911755d088"
+    },
+    {
+        "id": "6ed322ac-ee32-4ef6-a95f-cccf3c5ad00f",
+        "book_id": "d5014efa-3d9f-49ad-865e-56a39c98a90a",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-23 11:24:08",
+        "user_id": "d9f4d1e6-476c-45b6-968f-80911755d088"
+    },
+    {
+        "id": "6207b952-2a1e-47b0-a01b-b647bee8cb93",
+        "book_id": "90c25d20-c68b-4152-9be4-eb7efb5ae5af",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-23 11:27:05",
+        "user_id": "d9f4d1e6-476c-45b6-968f-80911755d088"
+    },
+    {
+        "id": "5d170ed6-19b9-45dd-8fbd-dc90040df045",
+        "book_id": "7c226da7-ff4f-4bab-969a-6af54a671ea4",
+        "action_type": "Wypożyczono",
+        "action_time": "2025-07-23 11:30:45",
+        "user_id": "d9f4d1e6-476c-45b6-968f-80911755d088"
     }
 ]

@@ -14,7 +14,9 @@
         "name": "Anna",
         "surname": "Napiórkowska",
         "password": "patras",
-        "borrowed_books": [],
+        "borrowed_books": [
+            "7c226da7-ff4f-4bab-969a-6af54a671ea4"
+        ],
         "is_admin": false
     }
 ]

@@ -13,6 +13,7 @@ class Library:
         self.file_path = file_path
         self.books = self.load_books()
         self.logs_manager = LogsManager()
+        self.users_manager = UsersManager()
 
     def load_books(self):
         if not os.path.exists(self.file_path):
@@ -169,7 +170,10 @@ class Library:
                     if book.id == selected_book.id:
                         if action_type == 'borrow':
                             book.borrow_book()
-                            user.borrow_book(selected_book.id)
+                            for u in self.users_manager.users_list:
+                                if u.id == user.id:
+                                    u.borrow_book(selected_book.id)
+                                    break
                             print(f'Książka została wypożyczona.')
                             self.logs_manager.add_new_log(selected_book.id, "Wypożyczono", user.id)
                         else:
@@ -177,6 +181,7 @@ class Library:
                             print(f'Książka została zwrócona.')
                             self.logs_manager.add_new_log(selected_book.id, "Zwrócono")
                 self.save_books()
+                self.users_manager.save_users()
     
     def edit_book_data(self):
         self.display_books(self.books)
